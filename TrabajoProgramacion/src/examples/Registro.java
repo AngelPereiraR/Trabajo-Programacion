@@ -47,7 +47,7 @@ public class Registro extends JFrame {
 	public Registro() {
 		super("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 300);
+    setBounds(100, 100, 550, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
@@ -61,7 +61,7 @@ public class Registro extends JFrame {
 		add(panel1);
 		
 		JPanel panel2 = new JPanel();
-		contrasena = new JLabel("Contraseña");
+		contrasena = new JLabel("ContraseÃ±a");
 		panel2.add(contrasena);
 		txtContrasena = new JTextField(20);
 		panel2.add(txtContrasena);

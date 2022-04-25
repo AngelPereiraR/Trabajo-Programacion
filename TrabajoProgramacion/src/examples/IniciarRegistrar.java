@@ -49,7 +49,7 @@ public class IniciarRegistrar extends JFrame {
 	public IniciarRegistrar() {
 		super("Iniciar o Registrar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 300);
+    setBounds(100, 100, 550, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
@@ -63,7 +63,7 @@ public class IniciarRegistrar extends JFrame {
 		add(panel1);
 		
 		JPanel panel2 = new JPanel();
-		contrasena = new JLabel("Contraseña");
+		contrasena = new JLabel("ContraseÃ±a");
 		panel2.add(contrasena);
 		txtContrasena = new JTextField(20);
 		panel2.add(txtContrasena);
@@ -72,7 +72,7 @@ public class IniciarRegistrar extends JFrame {
 		JPanel panel3 = new JPanel();
 		btnRegistro = new JButton("Registrar Usuario");
 		panel3.add(btnRegistro);
-		btnIniciar = new JButton("Iniciar Sesión");
+		btnIniciar = new JButton("Iniciar SesiÃ³n");
 		panel3.add(btnIniciar);
 		add(panel3);
 		
@@ -110,7 +110,7 @@ public class IniciarRegistrar extends JFrame {
 								Inicio frame = new Inicio(txtUsuario, txtContrasena, null);
 								frame.setVisible(true);
 							} else {
-								JOptionPane.showMessageDialog(IniciarRegistrar.this, "No existe ningún usuario con ambos credenciales.");
+								JOptionPane.showMessageDialog(IniciarRegistrar.this, "No existe ningÃºn usuario con ambos credenciales.");
 							}
 						}
 					}
