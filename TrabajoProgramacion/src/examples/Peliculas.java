@@ -1,15 +1,16 @@
 package examples;
 
-import java.io.File;
 import java.io.Serializable;
+
+import javax.swing.Icon;
 
 public class Peliculas implements Serializable {
 	private int codigo;
 	private String titulo, genero;
 	private Usuario usuario;
-	private File foto;
+	private Icon foto;
 	
-	public Peliculas(int codigo, String titulo, String genero, File foto, Usuario usuario) {
+	public Peliculas(int codigo, String titulo, String genero, Icon foto, Usuario usuario) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -54,11 +55,11 @@ public class Peliculas implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public File getFoto() {
+	public Icon getFoto() {
 		return foto;
 	}
 
-	public void setFoto(File foto) {
+	public void setFoto(Icon foto) {
 		this.foto = foto;
 	}
 
