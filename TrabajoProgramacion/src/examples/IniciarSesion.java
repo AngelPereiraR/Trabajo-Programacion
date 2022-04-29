@@ -24,7 +24,8 @@ public class IniciarSesion extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel usuario, contrasena;
-	private JTextField txtUsuario, txtContrasena;
+	private JTextField txtUsuario;
+	private JPasswordField txtContrasena;
 	private JButton btnRegistro, btnIniciar;
 
 	/**
@@ -65,7 +66,7 @@ public class IniciarSesion extends JFrame {
 		JPanel panel2 = new JPanel();
 		contrasena = new JLabel("Contraseña");
 		panel2.add(contrasena);
-		txtContrasena = new JTextField(20);
+		txtContrasena = new JPasswordField(20);
 		panel2.add(txtContrasena);
 		add(panel2);
 		
@@ -83,7 +84,10 @@ public class IniciarSesion extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton escogido = (JButton) e.getSource();
-			
+			//Cambio al obtener la contraseña
+			//Recupera la contraseña como array de char y pasa el array a un String
+			char[] arrayC = txtContrasena.getPassword();
+			String pass = new String(arrayC);
 			if(escogido.equals(btnIniciar)) {
 				try {
 					File f = new File("TrabajoProgramacion/usuarios.txt");
@@ -94,7 +98,8 @@ public class IniciarSesion extends JFrame {
 							String linea = br.readLine();
 							while (linea != null) {
 								String[] datos = linea.split(";");
-								if (txtUsuario.getText().equals(datos[0]) && txtContrasena.getText().equals(datos[1])) {
+								//Cambio en la comparacion de la clave
+								if (txtUsuario.getText().equals(datos[0]) && pass.equals(datos[1])) {
 									existe = true;
 								}
 								linea = br.readLine();

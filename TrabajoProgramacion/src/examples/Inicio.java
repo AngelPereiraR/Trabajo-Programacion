@@ -2,13 +2,22 @@ package examples;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class Inicio extends JFrame {
 
@@ -16,7 +25,9 @@ public class Inicio extends JFrame {
 	private JLabel usuario, titulo;
 	private JTextField txtUsuario;
 	private JButton detalles, introducir, actualizar, eliminar, estadistica;
-
+	private JTable tabla;
+	private DefaultTableModel dt;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,11 +50,13 @@ public class Inicio extends JFrame {
 	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono) {
 		super("Películas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 300);
+		setBounds(100, 100, 700, 600);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
+		
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario:");
 		this.txtUsuario = new JTextField(20);
@@ -52,8 +65,15 @@ public class Inicio extends JFrame {
 		panel1.add(usuario);
 		panel1.add(this.txtUsuario);
 		add(panel1);
-		//panel2...
-		//JTable...
+		
+		JPanel panel2=new JPanel();
+		tabla = new JTable();
+		tabla.setFillsViewportHeight(true);
+		rellenarTabla();
+		tabla.setFillsViewportHeight(true);
+		panel2.add(new JScrollPane(tabla));
+		add(panel2);
+		
 		JPanel panel3 = new JPanel();
 		detalles = new JButton("Detalles");
 		introducir = new JButton("Introducir película");
@@ -71,5 +91,46 @@ public class Inicio extends JFrame {
 		panel5.add(estadistica);
 		add(panel5);
 	}
-
+	//Metodo rellenar tabla 
+		public void rellenarTabla() throws IOException, ClassNotFoundException {
+			//Creamos objeto File con la ruta del fichero binario que contiene la info de la tabla
+			//Suponemos que el nombre del fichero binario es peliculas
+			File fb = new File("TrabajoProgramacion/peliculas");
+			//Crear un objeto del modelo generico de tabla
+			dt=new DefaultTableModel();
+			//Definir un array de columnas (Tantas como se necesiten)
+			String[] columnas= {"CÓDIGO","TÍTULO","GÉNERO","USUARIO"};
+			//Define los nombres de las columnas
+			dt.setColumnIdentifiers(columnas);
+			//Comprobamos si existe el fichero 
+			if (fb.exists()) {
+				//Abrimos flujo de lectura
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fb));
+				//Crea un array de Objetos peliculas
+				List<Peliculas> peliculas = new ArrayList<>();
+				peliculas = (ArrayList<Peliculas>) ois.readObject();
+				//Bucle que lee todos los objetos del fichero binario
+				for (Peliculas p : peliculas) {
+					//Separa la informacion de cada la linea del fichero por ;
+					//o por cualquier caracter que se especifique
+					//Array de datos separados por ;
+					String codigo = String.valueOf(p.getCodigo());
+					String titulo = p.getTitulo();
+					String genero = p.getGenero();
+					String usuario = p.getUsuario().getUsuario();
+					
+					//Creamos un array de object fila que sea tan largo como columnas haya
+					Object[] fila=new Object[4];
+					//Asignamos la info a cada espacio de la tabla
+					fila[0]= codigo;
+					fila[1]= titulo;
+					fila[2]= genero;
+					fila[3]= usuario;
+					//Añadimos la fila a la tabla
+					dt.addRow(fila);
+				}
+				//Establecemos el modelo establecido a la tabla
+				tabla.setModel(dt);
+			}
+		}
 }

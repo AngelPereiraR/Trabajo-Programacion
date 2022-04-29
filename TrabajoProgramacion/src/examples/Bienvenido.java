@@ -45,6 +45,8 @@ public class Bienvenido extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
+		//Centrar frame
+		setLocationRelativeTo(null);
 		
 		panel1 = new JPanel();
 		bienvenido = new JLabel("Bienvenid@ a Cinema Paradise");
@@ -73,9 +75,13 @@ public class Bienvenido extends JFrame {
 			if(escogido.equals(btnReg)) {
 				Registro frame = new Registro();
 				frame.setVisible(true);
+				//Centrar frame
+				frame.setLocationRelativeTo(null);
 			} else if(escogido.equals(btnIni)) {
 				IniciarSesion frame = new IniciarSesion();
 				frame.setVisible(true);
+				//Centrar frame
+				frame.setLocationRelativeTo(null);
 			}
 			
 		}
