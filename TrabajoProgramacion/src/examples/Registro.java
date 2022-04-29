@@ -47,7 +47,7 @@ public class Registro extends JFrame {
 	public Registro() {
 		super("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 300);
+		setBounds(100, 100, 400, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
@@ -122,7 +122,7 @@ public class Registro extends JFrame {
 					e2.printStackTrace();
 				}
 			} else if(escogido.equals(btnVolver)) {
-				IniciarRegistrar frame = new IniciarRegistrar();
+				Bienvenido frame = new Bienvenido();
 				frame.setVisible(true);
 			}
 			

@@ -39,7 +39,7 @@ public class Inicio extends JFrame {
 	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono) {
 		super("Películas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 300);
+		setBounds(100, 100, 400, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
@@ -57,17 +57,19 @@ public class Inicio extends JFrame {
 		JPanel panel3 = new JPanel();
 		detalles = new JButton("Detalles");
 		introducir = new JButton("Introducir película");
+		JPanel panel4 = new JPanel();
 		actualizar = new JButton("Actualizar película");
 		eliminar = new JButton("Eliminar película");
 		panel3.add(detalles);
 		panel3.add(introducir);
-		panel3.add(actualizar);
-		panel3.add(eliminar);
 		add(panel3);
-		JPanel panel4 = new JPanel();
-		estadistica = new JButton("Estadísticas");
-		panel4.add(estadistica);
+		panel4.add(actualizar);
+		panel4.add(eliminar);
 		add(panel4);
+		JPanel panel5 = new JPanel();
+		estadistica = new JButton("Estadísticas");
+		panel5.add(estadistica);
+		add(panel5);
 	}
 
 }
