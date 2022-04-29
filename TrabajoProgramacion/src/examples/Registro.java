@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Registro extends JFrame {
 
-	private File f = new File("usuarios.txt");
+	private File f = new File("TrabajoProgramacion/usuarios.txt");
 	private JPanel contentPane;
 	private JLabel usuario, contrasena, telefono;
 	private JTextField txtUsuario, txtContrasena, txtTelefono;
