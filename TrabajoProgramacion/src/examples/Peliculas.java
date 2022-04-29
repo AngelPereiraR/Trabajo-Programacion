@@ -1,18 +1,21 @@
 package examples;
 
+import java.io.File;
 import java.io.Serializable;
 
 public class Peliculas implements Serializable {
 	private int codigo;
 	private String titulo, genero;
 	private Usuario usuario;
+	private File foto;
 	
-	public Peliculas(int codigo, String titulo, String genero, Usuario usuario) {
+	public Peliculas(int codigo, String titulo, String genero, File foto, Usuario usuario) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.genero = genero;
 		this.usuario = usuario;
+		this.foto = foto;
 	}
 
 	public Peliculas() {
@@ -49,6 +52,14 @@ public class Peliculas implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public File getFoto() {
+		return foto;
+	}
+
+	public void setFoto(File foto) {
+		this.foto = foto;
 	}
 
 	@Override
