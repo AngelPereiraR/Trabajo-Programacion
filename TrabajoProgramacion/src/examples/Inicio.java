@@ -4,8 +4,10 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +24,15 @@ import javax.swing.table.DefaultTableModel;
 public class Inicio extends JFrame {
 
 	private JPanel contentPane;
-	private JLabel usuario, titulo;
+	private JLabel usuario;
 	private JTextField txtUsuario;
 	private JButton detalles, introducir, actualizar, eliminar, estadistica;
 	private JTable tabla;
 	private DefaultTableModel dt;
+	private File fb;
+	private ObjectOutputStream os = null;
+	private ObjectInputStream is = null;
+	//private (Creación del ArrayList)
 	
 	/**
 	 * Launch the application.
@@ -46,8 +52,10 @@ public class Inicio extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono) {
+	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono) throws ClassNotFoundException, IOException {
 		super("Películas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
@@ -56,6 +64,20 @@ public class Inicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
+		
+		fb = new File("TrabajoProgramacion/peliculas");
+		if(fb.exists()) {
+			is = new ObjectInputStream(new FileInputStream(fb));
+			try {
+				Peliculas p = (Peliculas) is.readObject();
+				while (p != null) {
+					//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
+					//ArrayList.add(p);
+					p = (Peliculas) is.readObject();
+				}
+			} catch (Exception ex) {}
+			is.close();
+		}
 		
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario:");
@@ -90,12 +112,21 @@ public class Inicio extends JFrame {
 		estadistica = new JButton("Estadísticas");
 		panel5.add(estadistica);
 		add(panel5);
+		
+		try {
+			if (fb.exists()) {
+				os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
+			} else {
+				os = new ObjectOutputStream(new FileOutputStream(fb));
+			}
+		} catch (Exception ex) {}
+		
+		//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
+		//os.writeObject(ArrayList);
+		os.close();
 	}
 	//Metodo rellenar tabla 
 		public void rellenarTabla() throws IOException, ClassNotFoundException {
-			//Creamos objeto File con la ruta del fichero binario que contiene la info de la tabla
-			//Suponemos que el nombre del fichero binario es peliculas
-			File fb = new File("TrabajoProgramacion/peliculas");
 			//Crear un objeto del modelo generico de tabla
 			dt=new DefaultTableModel();
 			//Definir un array de columnas (Tantas como se necesiten)
