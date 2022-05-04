@@ -135,31 +135,35 @@ public class Inicio extends JFrame {
 			dt.setColumnIdentifiers(columnas);
 			//Comprobamos si existe el fichero 
 			if (fb.exists()) {
-				//Abrimos flujo de lectura
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fb));
-				//Crea un array de Objetos peliculas
-				List<Peliculas> peliculas = new ArrayList<>();
-				peliculas = (ArrayList<Peliculas>) ois.readObject();
-				//Bucle que lee todos los objetos del fichero binario
-				for (Peliculas p : peliculas) {
-					//Separa la informacion de cada la linea del fichero por ;
-					//o por cualquier caracter que se especifique
-					//Array de datos separados por ;
-					String codigo = String.valueOf(p.getCodigo());
-					String titulo = p.getTitulo();
-					String genero = p.getGenero();
-					String usuario = p.getUsuario().getUsuario();
-					
-					//Creamos un array de object fila que sea tan largo como columnas haya
-					Object[] fila=new Object[4];
-					//Asignamos la info a cada espacio de la tabla
-					fila[0]= codigo;
-					fila[1]= titulo;
-					fila[2]= genero;
-					fila[3]= usuario;
-					//Añadimos la fila a la tabla
-					dt.addRow(fila);
-				}
+				try{
+					//Abrimos flujo de lectura
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fb));
+					//Crea un array de Objetos peliculas
+					List<Peliculas> peliculas = new ArrayList<>();
+					peliculas = (ArrayList<Peliculas>) ois.readObject();
+					//Bucle que lee todos los objetos del fichero binario
+					for (Peliculas p : peliculas) {
+						//Separa la informacion de cada la linea del fichero por ;
+						//o por cualquier caracter que se especifique
+						//Array de datos separados por ;
+						String codigo = String.valueOf(p.getCodigo());
+						String titulo = p.getTitulo();
+						String genero = p.getGenero();
+						String usuario = p.getUsuario().getUsuario();
+						
+						//Creamos un array de object fila que sea tan largo como columnas haya
+						Object[] fila=new Object[4];
+						//Asignamos la info a cada espacio de la tabla
+						fila[0]= codigo;
+						fila[1]= titulo;
+						fila[2]= genero;
+						fila[3]= usuario;
+						//Añadimos la fila a la tabla
+						dt.addRow(fila);
+					}
+				} catch(Exception ex) {}
+				
+				
 				//Establecemos el modelo establecido a la tabla
 				tabla.setModel(dt);
 			}
