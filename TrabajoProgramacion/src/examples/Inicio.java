@@ -32,7 +32,7 @@ public class Inicio extends JFrame {
 	private File fb;
 	private ObjectOutputStream os = null;
 	private ObjectInputStream is = null;
-	//private (Creación del ArrayList)
+	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
 	
 	/**
 	 * Launch the application.
@@ -65,6 +65,7 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 		
+		
 		fb = new File("TrabajoProgramacion/peliculas");
 		if(fb.exists()) {
 			is = new ObjectInputStream(new FileInputStream(fb));
@@ -72,8 +73,9 @@ public class Inicio extends JFrame {
 				Peliculas p = (Peliculas) is.readObject();
 				while (p != null) {
 					//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
-					//ArrayList.add(p);
+					arrayPeliculas.add(p);
 					p = (Peliculas) is.readObject();
+					
 				}
 			} catch (Exception ex) {}
 			is.close();
@@ -113,6 +115,8 @@ public class Inicio extends JFrame {
 		panel5.add(estadistica);
 		add(panel5);
 		
+		//ManejadorBotones
+		
 		try {
 			if (fb.exists()) {
 				os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
@@ -122,7 +126,7 @@ public class Inicio extends JFrame {
 		} catch (Exception ex) {}
 		
 		//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
-		//os.writeObject(ArrayList);
+		os.writeObject(arrayPeliculas);
 		os.close();
 	}
 	//Metodo rellenar tabla 
