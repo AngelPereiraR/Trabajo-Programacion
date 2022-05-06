@@ -103,7 +103,7 @@ public class IniciarSesion extends JFrame {
 							}
 							br.close();
 							if (existe == true) {
-								Inicio frame = new Inicio(txtUsuario, txtContrasena, null);
+								Inicio frame = new Inicio(txtUsuario, txtContrasena, null, null);
 								frame.setVisible(true);
 								dispose();
 							} else {

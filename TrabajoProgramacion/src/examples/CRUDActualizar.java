@@ -33,6 +33,7 @@ public class CRUDActualizar extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JButton btnConfirmar, btnVolver;
+	private ArrayList<Peliculas> arrayPeliculas;
 
 	/**
 	 * Launch the application.
@@ -60,6 +61,7 @@ public class CRUDActualizar extends JFrame {
 		// JTextField
 		//crudArray de la pelicula seleccionada para relacionarla con el array tendría que tener los datos de esa película.
 		
+		arrayPeliculas = crudArray;
 		
 		setTitle("Creaci\u00F3n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,7 +147,7 @@ public class CRUDActualizar extends JFrame {
 
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono);
+					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -162,7 +164,7 @@ public class CRUDActualizar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono);
+					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -189,7 +191,7 @@ public class CRUDActualizar extends JFrame {
 			if (escogido.equals(btnConfirmar)) {
 				Inicio frame = null;
 				try {
-					frame = new Inicio(textField, textField, textField);
+					frame = new Inicio(textField, textField, textField, arrayPeliculas);
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -199,7 +201,7 @@ public class CRUDActualizar extends JFrame {
 			} else if (escogido.equals(btnVolver)) {
 				Inicio frame = null;
 				try {
-					frame = new Inicio(textField, textField, textField);
+					frame = new Inicio(textField, textField, textField, arrayPeliculas);
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

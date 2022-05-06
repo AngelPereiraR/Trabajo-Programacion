@@ -41,7 +41,7 @@ public class Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio frame = new Inicio(null, null, null);
+					Inicio frame = new Inicio(null, null, null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class Inicio extends JFrame {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono) throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
 		super("Películas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
@@ -65,6 +65,8 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 		
+		this.arrayPeliculas = arrayPeliculas;
+		
 		
 		fb = new File("TrabajoProgramacion/peliculas");
 		if(fb.exists()) {
@@ -73,7 +75,7 @@ public class Inicio extends JFrame {
 				Peliculas p = (Peliculas) is.readObject();
 				while (p != null) {
 					//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
-					arrayPeliculas.add(p);
+					this.arrayPeliculas.add(p);
 					p = (Peliculas) is.readObject();
 					
 				}
@@ -126,7 +128,7 @@ public class Inicio extends JFrame {
 		} catch (Exception ex) {}
 		
 		//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
-		os.writeObject(arrayPeliculas);
+		os.writeObject(this.arrayPeliculas);
 		os.close();
 	}
 	//Metodo rellenar tabla 

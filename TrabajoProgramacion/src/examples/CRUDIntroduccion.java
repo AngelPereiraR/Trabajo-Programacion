@@ -36,6 +36,7 @@ public class CRUDIntroduccion extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JButton btnConfirmar, btnVolver;
+	private ArrayList<Peliculas> arrayPeliculas;
 
 	/**
 	 * Launch the application.
@@ -65,6 +66,8 @@ public class CRUDIntroduccion extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		arrayPeliculas = crudArray;
 
 		JLabel JLabelAno = new JLabel("A\u00F1o");
 		JLabelAno.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -131,7 +134,7 @@ public class CRUDIntroduccion extends JFrame {
 
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono);
+					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -148,7 +151,7 @@ public class CRUDIntroduccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono);
+					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -174,7 +177,7 @@ public class CRUDIntroduccion extends JFrame {
 			if (escogido.equals(btnConfirmar)) {
 				Inicio frame = null;
 				try {
-					frame = new Inicio(txtUsuario, txtContrasena, txtTelefono);
+					frame = new Inicio(txtUsuario, txtContrasena, txtTelefono, arrayPeliculas);
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -184,7 +187,7 @@ public class CRUDIntroduccion extends JFrame {
 			} else if (escogido.equals(btnVolver)) {
 				Inicio frame = null;
 				try {
-					frame = new Inicio(textField, textField, textField);
+					frame = new Inicio(textField, textField, textField, arrayPeliculas);
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
