@@ -105,6 +105,7 @@ public class IniciarSesion extends JFrame {
 							if (existe == true) {
 								Inicio frame = new Inicio(txtUsuario, txtContrasena, null);
 								frame.setVisible(true);
+								dispose();
 							} else {
 								JOptionPane.showMessageDialog(IniciarSesion.this, "No existe ningún usuario con ambos credenciales.");
 							}

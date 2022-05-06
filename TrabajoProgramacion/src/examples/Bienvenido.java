@@ -77,11 +77,13 @@ public class Bienvenido extends JFrame {
 				frame.setVisible(true);
 				//Centrar frame
 				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if(escogido.equals(btnIni)) {
 				IniciarSesion frame = new IniciarSesion();
 				frame.setVisible(true);
 				//Centrar frame
 				frame.setLocationRelativeTo(null);
+				dispose();
 			}
 			
 		}

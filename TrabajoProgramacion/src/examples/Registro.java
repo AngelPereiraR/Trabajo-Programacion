@@ -115,6 +115,7 @@ public class Registro extends JFrame {
 								fw.close();
 								Inicio frame = new Inicio(txtUsuario, txtContrasena, txtTelefono);
 								frame.setVisible(true);
+								dispose();
 							}
 						}
 					}
@@ -124,6 +125,7 @@ public class Registro extends JFrame {
 			} else if(escogido.equals(btnVolver)) {
 				Bienvenido frame = new Bienvenido();
 				frame.setVisible(true);
+				dispose();
 			}
 			
 		}
