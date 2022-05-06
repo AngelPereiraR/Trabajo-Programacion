@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +27,9 @@ public class IniciarSesion extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtContrasena;
 	private JButton btnIniciar;
+	private File fb;
+	private ObjectInputStream is = null;
+	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>(), arrayPeliculasFichero = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -103,7 +109,19 @@ public class IniciarSesion extends JFrame {
 							}
 							br.close();
 							if (existe == true) {
-								Inicio frame = new Inicio(txtUsuario, null);
+								fb = new File("TrabajoProgramacion/peliculas");
+								if (fb.exists()) {
+									is = new ObjectInputStream(new FileInputStream(fb));
+									try {
+										arrayPeliculasFichero = (ArrayList<Peliculas>) is.readObject();
+										while (arrayPeliculas != null) {
+											arrayPeliculas.addAll(arrayPeliculasFichero);
+											arrayPeliculasFichero = (ArrayList<Peliculas>) is.readObject();
+										}
+									}
+									catch (Exception ex) {}
+								}
+								Inicio frame = new Inicio(txtUsuario, arrayPeliculas);
 								frame.setVisible(true);
 								dispose();
 							} else {

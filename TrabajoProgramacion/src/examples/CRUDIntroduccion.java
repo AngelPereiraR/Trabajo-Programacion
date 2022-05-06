@@ -30,13 +30,10 @@ import java.awt.event.ActionEvent;
 public class CRUDIntroduccion extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUsuario, txtContrasena, txtTelefono;
-	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
 	private JButton btnConfirmar, btnVolver;
 	private ArrayList<Peliculas> arrayPeliculas;
+	private String entra = "Entra";
 
 	/**
 	 * Launch the application.
@@ -66,52 +63,50 @@ public class CRUDIntroduccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		this.txtUsuario = txtUsuario;
+		txtUsuario2 = txtUsuario;
 		arrayPeliculas = crudArray;
 
 		JLabel JLabelAno = new JLabel("Año");
 		JLabelAno.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelAno.setBounds(28, 30, 78, 52);
+		JLabelAno.setBounds(28, 30, 78, 41);
 		contentPane.add(JLabelAno);
+		
+		txtAnio = new JTextField();
+		txtAnio.setBounds(116, 46, 192, 19);
+		contentPane.add(txtAnio);
+		txtAnio.setColumns(10);
 
 		JLabel JLabelTitulo = new JLabel("Título");
 		JLabelTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelTitulo.setBounds(28, 76, 78, 41);
+		JLabelTitulo.setBounds(28, 76, 78, 52);
 		contentPane.add(JLabelTitulo);
+		
+		txtTitulo = new JTextField();
+		txtTitulo.setBounds(116, 92, 192, 19);
+		contentPane.add(txtTitulo);
+		txtTitulo.setColumns(10);
 
 		JLabel JLabelGenero = new JLabel("Género");
 		JLabelGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelGenero.setBounds(28, 114, 89, 56);
 		contentPane.add(JLabelGenero);
+		
+		txtGenero = new JTextField();
+		txtGenero.setBounds(116, 132, 192, 19);
+		contentPane.add(txtGenero);
+		txtGenero.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblNewLabel.setBounds(28, 164, 78, 46);
 		contentPane.add(lblNewLabel);
-
-		textField_1 = new JTextField();
-		textField_1.setBounds(116, 86, 192, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-
-		textField = new JTextField();
-		textField.setBounds(116, 46, 192, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
-
-		textField_2 = new JTextField();
-		textField_2.setBounds(116, 132, 192, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-
 		
-		textField_3 = new JTextField(); 
-		textField_3.setBounds(116, 177, 192, 19);
-		contentPane.add(textField_3); 
-		textField_3.setColumns(10); 
-		textField_3.setText(txtUsuario.getText());
-		textField_3.setEditable(false);
-	
+		txtUsuario2 = new JTextField(); 
+		txtUsuario2.setBounds(116, 177, 192, 19);
+		contentPane.add(txtUsuario2); 
+		txtUsuario2.setColumns(10); 
+		txtUsuario2.setText(txtUsuario.getText());
+		txtUsuario2.setEditable(false);
 
 		JLabel JLabelImagen = new JLabel("Imagen");
 		JLabelImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -122,21 +117,17 @@ public class CRUDIntroduccion extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//Es importante este dato, porque aquí es donde se guardan los datos creados en el array
+			//Es importante este dato, porque aquí es donde se guardan los datos creados en el array
 				
-				try {
-					crudArray.add(new Peliculas(Integer.parseInt(textField_1.getText()), textField.getText(), textField_2.getText(), textField_3.getText()));
-				}catch(NumberFormatException nfe) {}
-				
+			crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), txtGenero.getText(), txtUsuario2.getText()));
 
-				Inicio ini = null;
-				try {
-					ini = new Inicio(txtUsuario, crudArray);
-				} catch (ClassNotFoundException | IOException e1) {
-				}
-				ini.setVisible(true);
-				ini.setLocationRelativeTo(null);
-				dispose();
+			Inicio ini = null;
+			try {
+				ini = new Inicio(txtUsuario, crudArray);
+			} catch (ClassNotFoundException | IOException e1) {}
+			ini.setVisible(true);
+			ini.setLocationRelativeTo(null);
+			dispose();
 			}
 		});
 		btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));

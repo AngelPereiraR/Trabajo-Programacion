@@ -6,8 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +27,9 @@ public class Registro extends JFrame {
 	private JLabel usuario, contrasena, telefono;
 	private JTextField txtUsuario, txtContrasena, txtTelefono;
 	private JButton btnRegistro, btnVolver;
+	private File fb;
+	private ObjectInputStream is = null;
+	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>(), arrayPeliculasFichero = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -113,6 +119,18 @@ public class Registro extends JFrame {
 								FileWriter fw = new FileWriter(f, true);
 								fw.write(txtUsuario.getText() + ";" + txtContrasena.getText() + ";" + txtTelefono.getText() + "\n");
 								fw.close();
+								fb = new File("TrabajoProgramacion/peliculas");
+								if (fb.exists()) {
+									is = new ObjectInputStream(new FileInputStream(fb));
+									try {
+										arrayPeliculasFichero = (ArrayList<Peliculas>) is.readObject();
+										while (arrayPeliculas != null) {
+											arrayPeliculas.addAll(arrayPeliculasFichero);
+											arrayPeliculasFichero = (ArrayList<Peliculas>) is.readObject();
+										}
+									}
+									catch (Exception ex) {}
+								}
 								Inicio frame = new Inicio(txtUsuario, null);
 								frame.setVisible(true);
 								dispose();

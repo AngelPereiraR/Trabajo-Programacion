@@ -27,8 +27,8 @@ public class Inicio extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel usuario;
-	private JTextField txtUsuario, txtContrasena, txtTelefono;
-	private JButton detalles, introducir, actualizar, eliminar, estadistica, salir, btnActTabla;
+	private JTextField txtUsuario;
+	private JButton detalles, introducir, actualizar, eliminar, estadistica, salir;
 	private JTable tabla;
 	private DefaultTableModel dt;
 	private File fb;
@@ -58,8 +58,7 @@ public class Inicio extends JFrame {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas)
-			throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
 		super("Películas");
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,24 +69,11 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 
-		this.arrayPeliculas = arrayPeliculas;
-
-		fb = new File("TrabajoProgramacion/peliculas");
-		if (fb.exists()) {
-			is = new ObjectInputStream(new FileInputStream(fb));
-			try {
-				Peliculas p = (Peliculas) is.readObject();
-				while (p != null) {
-					// Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado
-					// por el CRUD
-					this.arrayPeliculas.add(p);
-					p = (Peliculas) is.readObject();
-
-				}
-			} catch (Exception ex) {
-			}
-			is.close();
+		if(arrayPeliculas == null) {
+			arrayPeliculas = new ArrayList<>();
 		}
+		
+		this.arrayPeliculas = arrayPeliculas;
 
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario:");
@@ -128,11 +114,6 @@ public class Inicio extends JFrame {
 		panel6.add(salir);
 		add(panel6);
 
-		JPanel panel7 = new JPanel();
-		btnActTabla = new JButton("Actualizar tabla");
-		panel7.add(btnActTabla);
-		add(panel7);
-
 		// ManejadorBotones
 		ManejadorBoton mb = new ManejadorBoton();
 		detalles.addActionListener(mb);
@@ -141,7 +122,6 @@ public class Inicio extends JFrame {
 		eliminar.addActionListener(mb);
 		estadistica.addActionListener(mb);
 		salir.addActionListener(mb);
-		btnActTabla.addActionListener(mb);
 
 	}
 
@@ -153,37 +133,33 @@ public class Inicio extends JFrame {
 		String[] columnas = { "CÓDIGO", "TÍTULO", "GÉNERO", "USUARIO" };
 		// Define los nombres de las columnas
 		dt.setColumnIdentifiers(columnas);
-		// Comprobamos si existe el fichero
-		if (fb.exists()) {
-			try {
-				// Crea un array de Objetos peliculas
-
-				// Bucle que lee todos los objetos del fichero binario
-				for (Peliculas p : arrayPeliculas) {
-					// Separa la informacion de cada la linea del fichero por ;
-					// o por cualquier caracter que se especifique
-					// Array de datos separados por ;
-					String codigo = String.valueOf(p.getCodigo());
-					String titulo = p.getTitulo();
-					String genero = p.getGenero();
-					String usuario = p.getUsuario();
-
-					// Creamos un array de object fila que sea tan largo como columnas haya
-					Object[] fila = new Object[4];
-					// Asignamos la info a cada espacio de la tabla
-					fila[0] = codigo;
-					fila[1] = titulo;
-					fila[2] = genero;
-					fila[3] = usuario;
-					// Añadimos la fila a la tabla
-					dt.addRow(fila);
-				}
-			} catch (Exception ex) {
+		try {
+			// Crea un array de Objetos peliculas
+			
+			// Bucle que lee todos los objetos del fichero binario
+			for (Peliculas p : arrayPeliculas) {
+				// Separa la informacion de cada la linea del fichero por ;
+				// o por cualquier caracter que se especifique
+				
+				// Array de datos separados por ;
+				String codigo = String.valueOf(p.getCodigo());
+				String titulo = p.getTitulo();
+				String genero = p.getGenero();
+				String usuario = p.getUsuario();
+				// Creamos un array de object fila que sea tan largo como columnas haya
+				Object[] fila = new Object[4];
+				// Asignamos la info a cada espacio de la tabla
+				fila[0] = codigo;
+				fila[1] = titulo;
+				fila[2] = genero;
+				fila[3] = usuario;
+				// Añadimos la fila a la tabla
+				dt.addRow(fila);
 			}
+		} catch (Exception ex) {}
 
-			// Establecemos el modelo establecido a la tabla
-			tabla.setModel(dt);
-		}
+		// Establecemos el modelo establecido a la tabla
+		tabla.setModel(dt);
 	}
 
 	private class ManejadorBoton implements ActionListener {
@@ -210,35 +186,15 @@ public class Inicio extends JFrame {
 
 			} else if (selec.equals(estadistica)) {
 
-			} else if (selec.equals(btnActTabla)) {
-				try {
-					rellenarTabla();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			} else if (selec.equals(salir)) {
 				try {
-					if (fb.exists()) {
-						os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
-					} else {
-						os = new ObjectOutputStream(new FileOutputStream(fb));
-					}
-				} catch (Exception ex) {
-				}
-
-				// Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado
-				// por el CRUD
+					fb = new File("TrabajoProgramacion/peliculas");
+					os = new ObjectOutputStream(new FileOutputStream(fb));
+				} catch (Exception ex) {}
 				try {
 					os.writeObject(arrayPeliculas);
 					os.close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (IOException e1) {}
 				System.exit(0);
 			}
 		}
