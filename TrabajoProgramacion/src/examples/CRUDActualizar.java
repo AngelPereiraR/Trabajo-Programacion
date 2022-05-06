@@ -103,7 +103,7 @@ public class CRUDActualizar extends JFrame {
 		textField_1.setBounds(116, 86, 192, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-		int codigo = Integer.parseInt(textField_1.getText());
+		//int codigo = Integer.parseInt(textField_1.getText());
 
 		textField = new JTextField();
 		textField.setBounds(116, 46, 192, 19);
@@ -135,15 +135,15 @@ public class CRUDActualizar extends JFrame {
 		//Usuario -- Realmente si ya accedemos al Usuario creado en el Array esto no hace falta
 		// pero está puesto para que no de error en el commit.
 		// ??
-		int codeUsuario = Integer.parseInt(txtTelefono.getText());
-		Usuario user = new Usuario(txtUsuario.getText(),txtContrasena.getText(), codeUsuario);
+		//int codeUsuario = Integer.parseInt(txtTelefono.getText());
+		//Usuario user = new Usuario(txtUsuario.getText(),txtContrasena.getText(), codeUsuario);
 		
 		
-		JButton BotonConfirmar = new JButton("Confirmar");
-		BotonConfirmar.addActionListener(new ActionListener() {
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				crudArray.add(new Peliculas(codigo, titulo, genero, user));
+				//crudArray.add(new Peliculas(codigo, titulo, genero, user));
 
 				Inicio ini = null;
 				try {
@@ -155,12 +155,12 @@ public class CRUDActualizar extends JFrame {
 				dispose();
 			}
 		});
-		BotonConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		BotonConfirmar.setBounds(28, 279, 115, 33);
-		contentPane.add(BotonConfirmar);
+		btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnConfirmar.setBounds(28, 279, 115, 33);
+		contentPane.add(btnConfirmar);
 
-		JButton ButtonVolver = new JButton("Volver");
-		ButtonVolver.addActionListener(new ActionListener() {
+		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Inicio ini = null;
 				try {
@@ -172,9 +172,9 @@ public class CRUDActualizar extends JFrame {
 				dispose();
 			}
 		});
-		ButtonVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		ButtonVolver.setBounds(202, 279, 106, 33);
-		contentPane.add(ButtonVolver);
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnVolver.setBounds(202, 279, 106, 33);
+		contentPane.add(btnVolver);
 
 		ManejadorBotones escuchador = new ManejadorBotones();
 		btnConfirmar.addActionListener(escuchador);
