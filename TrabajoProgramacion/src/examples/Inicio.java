@@ -27,15 +27,15 @@ public class Inicio extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel usuario;
-	private JTextField txtUsuario, txtContrasena ,txtTelefono;
-	private JButton detalles, introducir, actualizar, eliminar, estadistica, salir;
+	private JTextField txtUsuario, txtContrasena, txtTelefono;
+	private JButton detalles, introducir, actualizar, eliminar, estadistica, salir, btnActTabla;
 	private JTable tabla;
 	private DefaultTableModel dt;
 	private File fb;
 	private ObjectOutputStream os = null;
 	private ObjectInputStream is = null;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -54,10 +54,12 @@ public class Inicio extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws IOException 
-	 * @throws ClassNotFoundException 
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
-	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas)
+			throws ClassNotFoundException, IOException {
 		super("Películas");
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,25 +69,26 @@ public class Inicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
-		
+
 		this.arrayPeliculas = arrayPeliculas;
-		
-		
+
 		fb = new File("TrabajoProgramacion/peliculas");
-		if(fb.exists()) {
+		if (fb.exists()) {
 			is = new ObjectInputStream(new FileInputStream(fb));
 			try {
 				Peliculas p = (Peliculas) is.readObject();
 				while (p != null) {
-					//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
+					// Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado
+					// por el CRUD
 					this.arrayPeliculas.add(p);
 					p = (Peliculas) is.readObject();
-					
+
 				}
-			} catch (Exception ex) {}
+			} catch (Exception ex) {
+			}
 			is.close();
 		}
-		
+
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario:");
 		this.txtUsuario = new JTextField(20);
@@ -94,15 +97,15 @@ public class Inicio extends JFrame {
 		panel1.add(usuario);
 		panel1.add(this.txtUsuario);
 		add(panel1);
-		
-		JPanel panel2=new JPanel();
+
+		JPanel panel2 = new JPanel();
 		tabla = new JTable();
 		tabla.setFillsViewportHeight(true);
 		rellenarTabla();
 		tabla.setFillsViewportHeight(true);
 		panel2.add(new JScrollPane(tabla));
 		add(panel2);
-		
+
 		JPanel panel3 = new JPanel();
 		detalles = new JButton("Detalles");
 		introducir = new JButton("Introducir película");
@@ -119,13 +122,18 @@ public class Inicio extends JFrame {
 		estadistica = new JButton("Estadísticas");
 		panel5.add(estadistica);
 		add(panel5);
-		
+
 		JPanel panel6 = new JPanel();
 		salir = new JButton("Salir");
 		panel6.add(salir);
 		add(panel6);
-		
-		//ManejadorBotones
+
+		JPanel panel7 = new JPanel();
+		btnActTabla = new JButton("Actualizar tabla");
+		panel7.add(btnActTabla);
+		add(panel7);
+
+		// ManejadorBotones
 		ManejadorBoton mb = new ManejadorBoton();
 		detalles.addActionListener(mb);
 		introducir.addActionListener(mb);
@@ -133,93 +141,107 @@ public class Inicio extends JFrame {
 		eliminar.addActionListener(mb);
 		estadistica.addActionListener(mb);
 		salir.addActionListener(mb);
-		
-	}
-	//Metodo rellenar tabla 
-		public void rellenarTabla() throws IOException, ClassNotFoundException {
-			//Crear un objeto del modelo generico de tabla
-			dt=new DefaultTableModel();
-			//Definir un array de columnas (Tantas como se necesiten)
-			String[] columnas= {"CÓDIGO","TÍTULO","GÉNERO","USUARIO"};
-			//Define los nombres de las columnas
-			dt.setColumnIdentifiers(columnas);
-			//Comprobamos si existe el fichero 
-			if (fb.exists()) {
-				try{
-					//Crea un array de Objetos peliculas
-					
-					//Bucle que lee todos los objetos del fichero binario
-					for (Peliculas p : arrayPeliculas) {
-						//Separa la informacion de cada la linea del fichero por ;
-						//o por cualquier caracter que se especifique
-						//Array de datos separados por ;
-						String codigo = String.valueOf(p.getCodigo());
-						String titulo = p.getTitulo();
-						String genero = p.getGenero();
-						String usuario = p.getUsuario();
-						
-						//Creamos un array de object fila que sea tan largo como columnas haya
-						Object[] fila=new Object[4];
-						//Asignamos la info a cada espacio de la tabla
-						fila[0]= codigo;
-						fila[1]= titulo;
-						fila[2]= genero;
-						fila[3]= usuario;
-						//Añadimos la fila a la tabla
-						dt.addRow(fila);
-					}
-				} catch(Exception ex) {}
-				
-				
-				//Establecemos el modelo establecido a la tabla
-				tabla.setModel(dt);
-			}
-		}
-		
-		private class ManejadorBoton implements ActionListener{
+		btnActTabla.addActionListener(mb);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JButton selec = (JButton) e.getSource();
-				if(selec.equals(detalles)) {
-					CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas);
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-					dispose();
-				}else if(selec.equals(introducir)) {
-					CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas);
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-					dispose();
-				}else if(selec.equals(actualizar)) {
-					CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas);
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-					dispose();
-				}else if(selec.equals(eliminar)) {
-					
-				}else if(selec.equals(estadistica)) {
-					
-				}else if(selec.equals(salir)) {
-					try {
-						if (fb.exists()) {
-							os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
-						} else {
-							os = new ObjectOutputStream(new FileOutputStream(fb));
-						}
-					} catch (Exception ex) {}
-					
-					//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
-					try {
-						os.writeObject(arrayPeliculas);
-						os.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					System.exit(0);
+	}
+
+	// Metodo rellenar tabla
+	public void rellenarTabla() throws IOException, ClassNotFoundException {
+		// Crear un objeto del modelo generico de tabla
+		dt = new DefaultTableModel();
+		// Definir un array de columnas (Tantas como se necesiten)
+		String[] columnas = { "CÓDIGO", "TÍTULO", "GÉNERO", "USUARIO" };
+		// Define los nombres de las columnas
+		dt.setColumnIdentifiers(columnas);
+		// Comprobamos si existe el fichero
+		if (fb.exists()) {
+			try {
+				// Crea un array de Objetos peliculas
+
+				// Bucle que lee todos los objetos del fichero binario
+				for (Peliculas p : arrayPeliculas) {
+					// Separa la informacion de cada la linea del fichero por ;
+					// o por cualquier caracter que se especifique
+					// Array de datos separados por ;
+					String codigo = String.valueOf(p.getCodigo());
+					String titulo = p.getTitulo();
+					String genero = p.getGenero();
+					String usuario = p.getUsuario();
+
+					// Creamos un array de object fila que sea tan largo como columnas haya
+					Object[] fila = new Object[4];
+					// Asignamos la info a cada espacio de la tabla
+					fila[0] = codigo;
+					fila[1] = titulo;
+					fila[2] = genero;
+					fila[3] = usuario;
+					// Añadimos la fila a la tabla
+					dt.addRow(fila);
 				}
+			} catch (Exception ex) {
 			}
-			
+
+			// Establecemos el modelo establecido a la tabla
+			tabla.setModel(dt);
 		}
+	}
+
+	private class ManejadorBoton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton selec = (JButton) e.getSource();
+			if (selec.equals(detalles)) {
+				CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (selec.equals(introducir)) {
+				CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (selec.equals(actualizar)) {
+				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (selec.equals(eliminar)) {
+
+			} else if (selec.equals(estadistica)) {
+
+			} else if (selec.equals(btnActTabla)) {
+				try {
+					rellenarTabla();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else if (selec.equals(salir)) {
+				try {
+					if (fb.exists()) {
+						os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
+					} else {
+						os = new ObjectOutputStream(new FileOutputStream(fb));
+					}
+				} catch (Exception ex) {
+				}
+
+				// Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado
+				// por el CRUD
+				try {
+					os.writeObject(arrayPeliculas);
+					os.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			}
+		}
+
+	}
 }
