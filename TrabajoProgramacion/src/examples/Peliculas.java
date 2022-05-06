@@ -8,15 +8,16 @@ public class Peliculas implements Serializable {
 	private int codigo;
 	private String titulo, genero;
 	private Usuario usuario;
-	private Icon foto;
+	//private Icon foto;
 	
-	public Peliculas(int codigo, String titulo, String genero, Icon foto, Usuario usuario) {
+	//Icon foto en el constructor
+	public Peliculas(int codigo, String titulo, String genero, Usuario usuario) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.genero = genero;
 		this.usuario = usuario;
-		this.foto = foto;
+		//this.foto = foto;
 	}
 
 	public Peliculas() {
@@ -55,14 +56,14 @@ public class Peliculas implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Icon getFoto() {
+	/*public Icon getFoto() {
 		return foto;
 	}
 
 	public void setFoto(Icon foto) {
 		this.foto = foto;
 	}
-
+*/
 	@Override
 	public String toString() {
 		return "Pelicula: Título " + titulo + "\nGénero: " + genero + "\n" + usuario + "\n";
