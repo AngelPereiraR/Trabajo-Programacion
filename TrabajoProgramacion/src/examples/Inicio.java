@@ -28,7 +28,7 @@ public class Inicio extends JFrame {
 	private JPanel contentPane;
 	private JLabel usuario;
 	private JTextField txtUsuario, txtContrasena ,txtTelefono;
-	private JButton detalles, introducir, actualizar, eliminar, estadistica;
+	private JButton detalles, introducir, actualizar, eliminar, estadistica, salir;
 	private JTable tabla;
 	private DefaultTableModel dt;
 	private File fb;
@@ -59,6 +59,7 @@ public class Inicio extends JFrame {
 	 */
 	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
 		super("Películas");
+		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
 		setLocationRelativeTo(null);
@@ -119,6 +120,11 @@ public class Inicio extends JFrame {
 		panel5.add(estadistica);
 		add(panel5);
 		
+		JPanel panel6 = new JPanel();
+		salir = new JButton("Salir");
+		panel6.add(salir);
+		add(panel6);
+		
 		//ManejadorBotones
 		ManejadorBoton mb = new ManejadorBoton();
 		detalles.addActionListener(mb);
@@ -126,17 +132,8 @@ public class Inicio extends JFrame {
 		actualizar.addActionListener(mb);
 		eliminar.addActionListener(mb);
 		estadistica.addActionListener(mb);
-		try {
-			if (fb.exists()) {
-				os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
-			} else {
-				os = new ObjectOutputStream(new FileOutputStream(fb));
-			}
-		} catch (Exception ex) {}
+		salir.addActionListener(mb);
 		
-		//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
-		os.writeObject(this.arrayPeliculas);
-		os.close();
 	}
 	//Metodo rellenar tabla 
 		public void rellenarTabla() throws IOException, ClassNotFoundException {
@@ -149,13 +146,10 @@ public class Inicio extends JFrame {
 			//Comprobamos si existe el fichero 
 			if (fb.exists()) {
 				try{
-					//Abrimos flujo de lectura
-					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fb));
 					//Crea un array de Objetos peliculas
-					List<Peliculas> peliculas = new ArrayList<>();
-					peliculas = (ArrayList<Peliculas>) ois.readObject();
+					
 					//Bucle que lee todos los objetos del fichero binario
-					for (Peliculas p : peliculas) {
+					for (Peliculas p : arrayPeliculas) {
 						//Separa la informacion de cada la linea del fichero por ;
 						//o por cualquier caracter que se especifique
 						//Array de datos separados por ;
@@ -206,6 +200,24 @@ public class Inicio extends JFrame {
 					
 				}else if(selec.equals(estadistica)) {
 					
+				}else if(selec.equals(salir)) {
+					try {
+						if (fb.exists()) {
+							os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
+						} else {
+							os = new ObjectOutputStream(new FileOutputStream(fb));
+						}
+					} catch (Exception ex) {}
+					
+					//Cuando esté el CRUD terminado, ArrayList se convertirá en el arrayList creado por el CRUD
+					try {
+						os.writeObject(arrayPeliculas);
+						os.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					System.exit(0);
 				}
 			}
 			

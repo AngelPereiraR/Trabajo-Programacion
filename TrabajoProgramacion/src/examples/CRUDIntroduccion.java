@@ -117,10 +117,6 @@ public class CRUDIntroduccion extends JFrame {
 		JLabelImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelImagen.setBounds(28, 220, 78, 33);
 		contentPane.add(JLabelImagen);
-
-		//Usuario
-		
-		
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
@@ -128,7 +124,10 @@ public class CRUDIntroduccion extends JFrame {
 				
 				//Es importante este dato, porque aquí es donde se guardan los datos creados en el array
 				
-				crudArray.add(new Peliculas(Integer.parseInt(textField_1.getText()), textField.getText(), textField_2.getText(), textField_3.getText()));
+				try {
+					crudArray.add(new Peliculas(Integer.parseInt(textField_1.getText()), textField.getText(), textField_2.getText(), textField_3.getText()));
+				}catch(NumberFormatException nfe) {}
+				
 
 				Inicio ini = null;
 				try {
