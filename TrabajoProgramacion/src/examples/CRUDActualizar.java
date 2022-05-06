@@ -42,7 +42,7 @@ public class CRUDActualizar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CRUDIntroduccion frame = new CRUDIntroduccion(null, null, null, null);
+					CRUDIntroduccion frame = new CRUDIntroduccion(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,14 +54,11 @@ public class CRUDActualizar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CRUDActualizar(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono,
-			ArrayList<Peliculas> crudArray) {
+	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
 		
 		//Mismo procedimiento que en detalles, la unica diferencia es que en vez de JLabel, los campos se rellenan en un 
 		// JTextField
 		//crudArray de la pelicula seleccionada para relacionarla con el array tendría que tener los datos de esa película.
-		
-		arrayPeliculas = crudArray;
 		
 		setTitle("Actualizar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,6 +67,9 @@ public class CRUDActualizar extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		arrayPeliculas = crudArray;
+		this.txtUsuario = txtUsuario;
 
 		JLabel JLabelAno = new JLabel("Año");
 		JLabelAno.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -103,26 +103,22 @@ public class CRUDActualizar extends JFrame {
 		textField_1.setBounds(116, 86, 192, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-		//int codigo = Integer.parseInt(textField_1.getText());
 
 		textField = new JTextField();
 		textField.setBounds(116, 46, 192, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		String titulo = textField_1.getText();
 
 		textField_2 = new JTextField();
 		textField_2.setBounds(116, 132, 192, 19);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
-		String genero = textField_1.getText();
 
 		
 		textField_3 = new JTextField(); 
 		textField_3.setBounds(116, 177, 192, 19);
 		contentPane.add(textField_3); 
 		textField_3.setColumns(10); 
-		textField_3.setText(txtUsuario.getText());
 		
 		
 	
@@ -135,19 +131,19 @@ public class CRUDActualizar extends JFrame {
 		//Usuario -- Realmente si ya accedemos al Usuario creado en el Array esto no hace falta
 		// pero está puesto para que no de error en el commit.
 		// ??
-		//int codeUsuario = Integer.parseInt(txtTelefono.getText());
-		//Usuario user = new Usuario(txtUsuario.getText(),txtContrasena.getText(), codeUsuario);
+		
 		
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//crudArray.add(new Peliculas(codigo, titulo, genero, user));
+				
+				crudArray.add(new Peliculas(Integer.parseInt(textField_1.getText()), textField.getText(), textField_2.getText(), textField_3.getText()));
 
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
+					ini = new Inicio(txtUsuario, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -164,7 +160,7 @@ public class CRUDActualizar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
+					ini = new Inicio(txtUsuario, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -175,43 +171,6 @@ public class CRUDActualizar extends JFrame {
 		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(202, 279, 106, 33);
 		contentPane.add(btnVolver);
-
-		ManejadorBotones escuchador = new ManejadorBotones();
-		btnConfirmar.addActionListener(escuchador);
-		btnVolver.addActionListener(escuchador);
-	}
-
-	private class ManejadorBotones implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JButton escogido = (JButton) e.getSource();
-
-		
-			if (escogido.equals(btnConfirmar)) {
-				Inicio frame = null;
-				try {
-					frame = new Inicio(textField, textField, textField, arrayPeliculas);
-				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-			} else if (escogido.equals(btnVolver)) {
-				Inicio frame = null;
-				try {
-					frame = new Inicio(textField, textField, textField, arrayPeliculas);
-				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-			}
-
-		}
-
 	}
 
 	/*

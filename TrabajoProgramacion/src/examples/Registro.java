@@ -113,7 +113,7 @@ public class Registro extends JFrame {
 								FileWriter fw = new FileWriter(f, true);
 								fw.write(txtUsuario.getText() + ";" + txtContrasena.getText() + ";" + txtTelefono.getText() + "\n");
 								fw.close();
-								Inicio frame = new Inicio(txtUsuario, txtContrasena, txtTelefono, null);
+								Inicio frame = new Inicio(txtUsuario, null);
 								frame.setVisible(true);
 								dispose();
 							}

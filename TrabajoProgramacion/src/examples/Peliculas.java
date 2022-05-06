@@ -7,11 +7,11 @@ import javax.swing.Icon;
 public class Peliculas implements Serializable {
 	private int codigo;
 	private String titulo, genero;
-	private Usuario usuario;
+	private String usuario;
 	//private Icon foto;
 	
 	//Icon foto en el constructor
-	public Peliculas(int codigo, String titulo, String genero, Usuario usuario) {
+	public Peliculas(int codigo, String titulo, String genero, String usuario) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -48,11 +48,11 @@ public class Peliculas implements Serializable {
 		this.genero = genero;
 	}
 
-	public Usuario getUsuario() {
+	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 

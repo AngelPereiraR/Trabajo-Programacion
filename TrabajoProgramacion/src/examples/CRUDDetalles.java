@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 public class CRUDDetalles extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUsuario, txtContrasena, txtTelefono;
+	private JTextField txtUsuario;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
 	/**
 	 * Launch the application.
@@ -26,7 +26,7 @@ public class CRUDDetalles extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CRUDDetalles frame = new CRUDDetalles(null, null, null, null);
+					CRUDDetalles frame = new CRUDDetalles(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class CRUDDetalles extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CRUDDetalles(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono, ArrayList<Peliculas> crudArray) {
+	public CRUDDetalles(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
 		
 		//crudArray de la pelicula seleccionada para relacionarla con el array tendría que tener los datos de esa película.
 		
@@ -51,9 +51,7 @@ public class CRUDDetalles extends JFrame {
 		contentPane.setLayout(null);
 		
 		this.txtUsuario = txtUsuario;
-		this.txtContrasena = txtContrasena;
-		this.txtTelefono = txtTelefono;
-		this.arrayPeliculas = arrayPeliculas;
+		this.arrayPeliculas = crudArray;
 		
 		
 		//Una vez con la pelicula seleccionada usamos la implementación para rellenar los campos.
@@ -106,7 +104,7 @@ public class CRUDDetalles extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			Inicio frame;
 			try {
-				frame = new Inicio(txtUsuario, txtContrasena, txtTelefono,arrayPeliculas );
+				frame = new Inicio(txtUsuario, arrayPeliculas);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 			} catch (ClassNotFoundException e1) {

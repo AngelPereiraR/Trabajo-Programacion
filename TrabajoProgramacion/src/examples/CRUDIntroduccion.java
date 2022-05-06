@@ -45,7 +45,7 @@ public class CRUDIntroduccion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CRUDIntroduccion frame = new CRUDIntroduccion(null, null, null, null);
+					CRUDIntroduccion frame = new CRUDIntroduccion(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,8 +57,7 @@ public class CRUDIntroduccion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CRUDIntroduccion(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono,
-			ArrayList<Peliculas> crudArray) {
+	public CRUDIntroduccion(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
 		setTitle("Creación");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 355, 394);
@@ -67,6 +66,7 @@ public class CRUDIntroduccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		this.txtUsuario = txtUsuario;
 		arrayPeliculas = crudArray;
 
 		JLabel JLabelAno = new JLabel("Año");
@@ -93,19 +93,16 @@ public class CRUDIntroduccion extends JFrame {
 		textField_1.setBounds(116, 86, 192, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-		//int codigo = Integer.parseInt(textField_1.getText());
 
 		textField = new JTextField();
 		textField.setBounds(116, 46, 192, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		String titulo = textField_1.getText();
 
 		textField_2 = new JTextField();
 		textField_2.setBounds(116, 132, 192, 19);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
-		String genero = textField_1.getText();
 
 		
 		textField_3 = new JTextField(); 
@@ -122,8 +119,7 @@ public class CRUDIntroduccion extends JFrame {
 		contentPane.add(JLabelImagen);
 
 		//Usuario
-		//int codeUsuario = Integer.parseInt(txtTelefono.getText());
-		//Usuario user = new Usuario(txtUsuario.getText(),txtContrasena.getText(), codeUsuario);
+		
 		
 		
 		btnConfirmar = new JButton("Confirmar");
@@ -131,11 +127,12 @@ public class CRUDIntroduccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Es importante este dato, porque aquí es donde se guardan los datos creados en el array
-				//crudArray.add(new Peliculas(codigo, titulo, genero, user));
+				
+				crudArray.add(new Peliculas(Integer.parseInt(textField_1.getText()), textField.getText(), textField_2.getText(), textField_3.getText()));
 
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
+					ini = new Inicio(txtUsuario, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -152,7 +149,7 @@ public class CRUDIntroduccion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Inicio ini = null;
 				try {
-					ini = new Inicio(txtUsuario, txtContrasena, txtTelefono, crudArray);
+					ini = new Inicio(txtUsuario, crudArray);
 				} catch (ClassNotFoundException | IOException e1) {
 				}
 				ini.setVisible(true);
@@ -163,44 +160,6 @@ public class CRUDIntroduccion extends JFrame {
 		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(202, 279, 106, 33);
 		contentPane.add(btnVolver);
-
-		ManejadorBotones escuchador = new ManejadorBotones();
-		btnConfirmar.addActionListener(escuchador);
-		btnVolver.addActionListener(escuchador);
-	}
-
-	private class ManejadorBotones implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JButton escogido = (JButton) e.getSource();
-			
-			if (escogido.equals(btnConfirmar)) {
-				Inicio frame = null;
-				try {
-					frame = new Inicio(txtUsuario, txtContrasena, txtTelefono, arrayPeliculas);
-				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-			} else if (escogido.equals(btnVolver)) {
-				Inicio frame = null;
-				try {
-					frame = new Inicio(textField, textField, textField, arrayPeliculas);
-				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-			}
-
-		}
-
 	}
 
 	/*

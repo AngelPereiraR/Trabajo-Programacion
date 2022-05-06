@@ -43,7 +43,7 @@ public class Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio frame = new Inicio(null, null, null, null);
+					Inicio frame = new Inicio(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class Inicio extends JFrame {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Inicio(JTextField txtUsuario, JTextField txtContrasena, JTextField txtTelefono, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
 		super("Películas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
@@ -67,8 +67,6 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 		
-		this.txtContrasena = txtContrasena;
-		this.txtTelefono = txtTelefono;
 		this.arrayPeliculas = arrayPeliculas;
 		
 		
@@ -164,7 +162,7 @@ public class Inicio extends JFrame {
 						String codigo = String.valueOf(p.getCodigo());
 						String titulo = p.getTitulo();
 						String genero = p.getGenero();
-						String usuario = p.getUsuario().getUsuario();
+						String usuario = p.getUsuario();
 						
 						//Creamos un array de object fila que sea tan largo como columnas haya
 						Object[] fila=new Object[4];
@@ -190,17 +188,17 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JButton selec = (JButton) e.getSource();
 				if(selec.equals(detalles)) {
-					CRUDDetalles frame = new CRUDDetalles(txtUsuario,txtContrasena,txtTelefono ,arrayPeliculas);
+					CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 					dispose();
 				}else if(selec.equals(introducir)) {
-					CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario,txtContrasena,txtTelefono ,arrayPeliculas);
+					CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 					dispose();
 				}else if(selec.equals(actualizar)) {
-					CRUDActualizar frame = new CRUDActualizar(txtUsuario,txtContrasena,txtTelefono ,arrayPeliculas);
+					CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 					dispose();
