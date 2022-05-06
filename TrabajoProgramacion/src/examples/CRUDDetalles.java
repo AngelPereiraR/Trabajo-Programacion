@@ -1,22 +1,24 @@
 package examples;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class CRUDDetalles extends JFrame {
 
 	private JPanel contentPane;
-
+	private JTextField txtUsuario, txtContrasena, txtTelefono;
+	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
 	/**
 	 * Launch the application.
 	 */
@@ -47,6 +49,11 @@ public class CRUDDetalles extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		this.txtUsuario = txtUsuario;
+		this.txtContrasena = txtContrasena;
+		this.txtTelefono = txtTelefono;
+		this.arrayPeliculas = arrayPeliculas;
 		
 		
 		//Una vez con la pelicula seleccionada usamos la implementación para rellenar los campos.
@@ -89,6 +96,28 @@ public class CRUDDetalles extends JFrame {
 		JButtonVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JButtonVolver.setBounds(81, 260, 106, 38);
 		contentPane.add(JButtonVolver);
+		ManejadorBoton mb = new ManejadorBoton();
+		JButtonVolver.addActionListener(mb);
+		
 	}
+	private class ManejadorBoton implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Inicio frame;
+			try {
+				frame = new Inicio(txtUsuario, txtContrasena, txtTelefono,arrayPeliculas );
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			dispose();
+		}
+		
+	}
 }

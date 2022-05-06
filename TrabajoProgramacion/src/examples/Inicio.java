@@ -2,6 +2,8 @@ package examples;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -25,7 +27,7 @@ public class Inicio extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel usuario;
-	private JTextField txtUsuario;
+	private JTextField txtUsuario, txtContrasena ,txtTelefono;
 	private JButton detalles, introducir, actualizar, eliminar, estadistica;
 	private JTable tabla;
 	private DefaultTableModel dt;
@@ -65,6 +67,8 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 		
+		this.txtContrasena = txtContrasena;
+		this.txtTelefono = txtTelefono;
 		this.arrayPeliculas = arrayPeliculas;
 		
 		
@@ -118,7 +122,12 @@ public class Inicio extends JFrame {
 		add(panel5);
 		
 		//ManejadorBotones
-		
+		ManejadorBoton mb = new ManejadorBoton();
+		detalles.addActionListener(mb);
+		introducir.addActionListener(mb);
+		actualizar.addActionListener(mb);
+		eliminar.addActionListener(mb);
+		estadistica.addActionListener(mb);
 		try {
 			if (fb.exists()) {
 				os = new AppendableObjectOutputStream(new FileOutputStream(fb, true));
@@ -173,5 +182,34 @@ public class Inicio extends JFrame {
 				//Establecemos el modelo establecido a la tabla
 				tabla.setModel(dt);
 			}
+		}
+		
+		private class ManejadorBoton implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton selec = (JButton) e.getSource();
+				if(selec.equals(detalles)) {
+					CRUDDetalles frame = new CRUDDetalles(txtUsuario,txtContrasena,txtTelefono ,arrayPeliculas);
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				}else if(selec.equals(introducir)) {
+					CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario,txtContrasena,txtTelefono ,arrayPeliculas);
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				}else if(selec.equals(actualizar)) {
+					CRUDActualizar frame = new CRUDActualizar(txtUsuario,txtContrasena,txtTelefono ,arrayPeliculas);
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				}else if(selec.equals(eliminar)) {
+					
+				}else if(selec.equals(estadistica)) {
+					
+				}
+			}
+			
 		}
 }
