@@ -87,7 +87,7 @@ public class CRUDDetalles extends JFrame {
 		JLabelUsuario.setBounds(39, 116, 75, 38);
 		contentPane.add(JLabelUsuario);
 		
-		JLabel JLabelImagen = new JLabel("Aqu\u00ED va la imagen");
+		JLabel JLabelImagen = new JLabel("Aquí va la imagen");
 		JLabelImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelImagen.setBounds(60, 177, 192, 30);
 		contentPane.add(JLabelImagen);

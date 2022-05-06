@@ -63,7 +63,7 @@ public class CRUDActualizar extends JFrame {
 		
 		arrayPeliculas = crudArray;
 		
-		setTitle("Creaci\u00F3n");
+		setTitle("Actualizar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 355, 394);
 		contentPane = new JPanel();
@@ -71,17 +71,17 @@ public class CRUDActualizar extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel JLabelAno = new JLabel("A\u00F1o");
+		JLabel JLabelAno = new JLabel("Año");
 		JLabelAno.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelAno.setBounds(28, 30, 78, 52);
 		contentPane.add(JLabelAno);
 
-		JLabel JLabelTitulo = new JLabel("T\u00EDtulo");
+		JLabel JLabelTitulo = new JLabel("Título");
 		JLabelTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelTitulo.setBounds(28, 76, 78, 41);
 		contentPane.add(JLabelTitulo);
 
-		JLabel JLabelGenero = new JLabel("G\u00E9nero");
+		JLabel JLabelGenero = new JLabel("Género");
 		JLabelGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelGenero.setBounds(28, 114, 89, 56);
 		contentPane.add(JLabelGenero);
