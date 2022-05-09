@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import examples.CRUDIntroduccion.InsertImg;
+
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class CRUDActualizar extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
-	private JButton btnConfirmar, btnVolver;
+	private JButton btnConfirmar, btnVolver, btnRuta;
 	private ArrayList<Peliculas> arrayPeliculas;
 
 	/**
@@ -51,13 +53,6 @@ public class CRUDActualizar extends JFrame {
 	 * Create the frame.
 	 */
 	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
-
-		// Mismo procedimiento que en detalles, la unica diferencia es que en vez de
-		// JLabel, los campos se rellenan en un
-		// JTextField
-		// crudArray de la pelicula seleccionada para relacionarla con el array tendría
-		// que tener los datos de esa película.
-
 		setTitle("Actualizar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 355, 394);
@@ -117,6 +112,13 @@ public class CRUDActualizar extends JFrame {
 		lblImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblImagen.setBounds(28, 220, 78, 33);
 		contentPane.add(lblImagen);
+		
+		btnRuta = new JButton(pelicula.getRuta());
+		btnRuta.setToolTipText("Buscar archivo");
+		btnRuta.setBounds(116, 225, 192, 19);
+		getContentPane().add(btnRuta);
+		InsertImg insertImg = new InsertImg();
+		btnRuta.addActionListener(insertImg);
 
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
@@ -124,12 +126,12 @@ public class CRUDActualizar extends JFrame {
 				int index = 0;
 				for(Peliculas p : crudArray) {
 					if(p.getCodigo()==pelicula.getCodigo() && p.getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && 
-							p.getGenero().equalsIgnoreCase(pelicula.getGenero())&& p.getUsuario().equalsIgnoreCase(pelicula.getUsuario()))
+							p.getGenero().equalsIgnoreCase(pelicula.getGenero())&& p.getUsuario().equalsIgnoreCase(pelicula.getUsuario()) && p.getRuta().equals(pelicula.getRuta()))
 						index = crudArray.indexOf(p);
 				}
 				crudArray.remove(crudArray.get(index));
 				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(),
-						txtGenero.getText(), txtUsuario2.getText()));
+						txtGenero.getText(), txtUsuario2.getText(), btnRuta.getText()));
 
 				Inicio ini = null;
 				try {
@@ -163,32 +165,33 @@ public class CRUDActualizar extends JFrame {
 		contentPane.add(btnVolver);
 	}
 
-	/*
-	 * public class InsertImg implements ActionListener {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { AbstractButton jtname
-	 * = null; if (jtname.getText().equals("")) { ImageIcon icon = new
-	 * ImageIcon("images/warning.png"); JOptionPane.showMessageDialog(null,
-	 * "The crypto name cant be empty", "", JOptionPane.ERROR_MESSAGE, icon); } else
-	 * {
-	 * 
-	 * JFileChooser fileChooser = new JFileChooser();
-	 * fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-	 * 
-	 * FileNameExtensionFilter soloImg = new
-	 * FileNameExtensionFilter("JPG & PNG Images", "png", "png");
-	 * fileChooser.setFileFilter(soloImg);
-	 * 
-	 * fileChooser.showSaveDialog(null);
-	 * 
-	 * File imagenes = new File("images/" + jtname.getText() + ".png");
-	 * 
-	 * Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath(); Path
-	 * destination = imagenes.toPath();
-	 * 
-	 * try { if (!imagenes.exists()) Files.copy(sourcer, destination); } catch
-	 * (IOException e1) { e1.printStackTrace(); } }
-	 * 
-	 * } }
-	 */
+	public class InsertImg implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			AbstractButton jtname = (AbstractButton) e.getSource();
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+			fileChooser.setFileFilter(soloImg);
+
+			fileChooser.showSaveDialog(null);
+
+			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
+			
+			jtname.setText(sourcer.toString());
+			
+			File imagenes = new File(jtname.getText());
+			
+			Path destination = imagenes.toPath();
+			
+			try {
+				if (!imagenes.exists())
+					Files.copy(sourcer, destination);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 }

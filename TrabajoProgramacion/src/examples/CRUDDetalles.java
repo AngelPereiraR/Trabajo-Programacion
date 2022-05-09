@@ -39,9 +39,6 @@ public class CRUDDetalles extends JFrame {
 	 * Create the frame.
 	 */
 	public CRUDDetalles(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
-		
-		//crudArray de la pelicula seleccionada para relacionarla con el array tendría que tener los datos de esa película.
-		
 		setTitle("Detalles");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 279, 376);
@@ -52,15 +49,6 @@ public class CRUDDetalles extends JFrame {
 		
 		this.txtUsuario = txtUsuario;
 		this.arrayPeliculas = crudArray;
-		
-		
-		//Una vez con la pelicula seleccionada usamos la implementación para rellenar los campos.
-		//Como lo que hemos almacenado en el array es un Objeto peliculas, usamos los métodos de la clase con el mismo nombre.
-		
-		// Para el grupo
-		//Necesito acceder al Objeto pelicula de la creada en el array
-		//Uso esto pero no me funciona, crudArray.getClass(); 
-		//Una vez dentro, acceder a los métodos de la clase pelicula getTitulo, getCodigo..etc para rellenar los campos.
 		
 		JLabel JLabelTitulo = new JLabel("Aquí va el título");
 		JLabelTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -76,9 +64,6 @@ public class CRUDDetalles extends JFrame {
 		JLabelGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelGenero.setBounds(39, 86, 75, 30);
 		contentPane.add(JLabelGenero);
-		
-		//Para el usuario es siguiendo con el procedimiento de antes, acceder al usuario 
-		// y usar el método getUsuario para rellenar el nombre aquí abajo
 		
 		JLabel JLabelUsuario = new JLabel("Aquí va el usuario");
 		JLabelUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));

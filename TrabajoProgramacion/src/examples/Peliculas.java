@@ -1,23 +1,24 @@
 package examples;
 
+import java.io.File;
 import java.io.Serializable;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class Peliculas implements Serializable {
 	private int codigo;
 	private String titulo, genero;
 	private String usuario;
-	//private Icon foto;
+	private String ruta;
 	
-	//Icon foto en el constructor
-	public Peliculas(int codigo, String titulo, String genero, String usuario) {
+	public Peliculas(int codigo, String titulo, String genero, String usuario, String ruta) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.genero = genero;
 		this.usuario = usuario;
-		//this.foto = foto;
+		this.ruta = ruta;
 	}
 
 	public Peliculas() {
@@ -56,14 +57,14 @@ public class Peliculas implements Serializable {
 		this.usuario = usuario;
 	}
 
-	/*public Icon getFoto() {
-		return foto;
+	public String getRuta() {
+		return ruta;
 	}
 
-	public void setFoto(Icon foto) {
-		this.foto = foto;
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
 	}
-*/
+
 	@Override
 	public String toString() {
 		return "Pelicula:\nAño:"+codigo+" \nTítulo: " + titulo + "\nGénero: " + genero + "\n" + usuario + "\n";

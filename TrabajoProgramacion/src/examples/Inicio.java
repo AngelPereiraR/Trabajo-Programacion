@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -60,8 +61,7 @@ public class Inicio extends JFrame {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas)
-			throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
 		super("Películas");
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,7 +117,6 @@ public class Inicio extends JFrame {
 		panel6.add(salir);
 		add(panel6);
 
-		// ManejadorTabla
 		tabla.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent Mouse_evt) {
 				JTable table = (JTable) Mouse_evt.getSource();
@@ -128,12 +127,12 @@ public class Inicio extends JFrame {
 					String tituloSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 1);
 					String generoSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 2);
 					String usuarioSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 3);
-					peliSelec = new Peliculas(anioSelec, tituloSelec, generoSelec, usuarioSelec);
+					String rutaSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 4);
+					peliSelec = new Peliculas(anioSelec, tituloSelec, generoSelec, usuarioSelec, rutaSelec);
 				}
 			}
 		});
 
-		// ManejadorBotones
 		ManejadorBoton mb = new ManejadorBoton();
 		detalles.addActionListener(mb);
 		introducir.addActionListener(mb);
@@ -144,41 +143,31 @@ public class Inicio extends JFrame {
 
 	}
 
-	// Metodo rellenar tabla
 	public void rellenarTabla() throws IOException, ClassNotFoundException {
-		// Crear un objeto del modelo generico de tabla
 		dt = new DefaultTableModel();
-		// Definir un array de columnas (Tantas como se necesiten)
-		String[] columnas = { "CÓDIGO", "TÍTULO", "GÉNERO", "USUARIO" };
-		// Define los nombres de las columnas
+		String[] columnas = { "CÓDIGO", "TÍTULO", "GÉNERO", "USUARIO", "RUTA IMAGEN" };
 		dt.setColumnIdentifiers(columnas);
 		try {
-			// Crea un array de Objetos peliculas
-
-			// Bucle que lee todos los objetos del fichero binario
 			for (Peliculas p : arrayPeliculas) {
-				// Separa la informacion de cada la linea del fichero por ;
-				// o por cualquier caracter que se especifique
-
-				// Array de datos separados por ;
 				String codigo = String.valueOf(p.getCodigo());
 				String titulo = p.getTitulo();
 				String genero = p.getGenero();
 				String usuario = p.getUsuario();
-				// Creamos un array de object fila que sea tan largo como columnas haya
-				Object[] fila = new Object[4];
-				// Asignamos la info a cada espacio de la tabla
+				String ruta = p.getRuta();
+				
+				Object[] fila = new Object[5];
+				
 				fila[0] = codigo;
 				fila[1] = titulo;
 				fila[2] = genero;
 				fila[3] = usuario;
-				// Añadimos la fila a la tabla
+				fila[4] = ruta;
+				
 				dt.addRow(fila);
 			}
 		} catch (Exception ex) {
 		}
 
-		// Establecemos el modelo establecido a la tabla
 		tabla.setModel(dt);
 	}
 

@@ -1,39 +1,31 @@
 package examples;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-
-import javax.swing.AbstractButton;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CRUDIntroduccion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
-	private JButton btnConfirmar, btnVolver;
+	private JButton btnConfirmar, btnVolver, btnRuta;
 	private ArrayList<Peliculas> arrayPeliculas;
-	private String entra = "Entra";
 
 	/**
 	 * Launch the application.
@@ -101,33 +93,35 @@ public class CRUDIntroduccion extends JFrame {
 		lblNewLabel.setBounds(28, 164, 78, 46);
 		contentPane.add(lblNewLabel);
 		
-		txtUsuario2 = new JTextField(); 
-		txtUsuario2.setBounds(116, 177, 192, 19);
-		contentPane.add(txtUsuario2); 
-		txtUsuario2.setColumns(10); 
-		txtUsuario2.setText(txtUsuario.getText());
-		txtUsuario2.setEditable(false);
+		JLabel lblUsuario = new JLabel(txtUsuario.getText());
+		lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblUsuario.setBounds(116, 177, 192, 25);
+		contentPane.add(lblUsuario);
 
 		JLabel JLabelImagen = new JLabel("Imagen");
 		JLabelImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelImagen.setBounds(28, 220, 78, 33);
 		contentPane.add(JLabelImagen);
 		
+		btnRuta = new JButton("");
+		btnRuta.setToolTipText("Buscar archivo");
+		btnRuta.setBounds(116, 225, 192, 19);
+		getContentPane().add(btnRuta);
+		InsertImg insertImg = new InsertImg();
+		btnRuta.addActionListener(insertImg);
+		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			//Es importante este dato, porque aquí es donde se guardan los datos creados en el array
-				
-			crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), txtGenero.getText(), txtUsuario2.getText()));
+				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), txtGenero.getText(), JLabelImagen.getText(), btnRuta.getText()));
 
-			Inicio ini = null;
-			try {
-				ini = new Inicio(txtUsuario, crudArray);
-			} catch (ClassNotFoundException | IOException e1) {}
-			ini.setVisible(true);
-			ini.setLocationRelativeTo(null);
-			dispose();
+				Inicio ini = null;
+				try {
+					ini = new Inicio(txtUsuario, crudArray);
+				} catch (ClassNotFoundException | IOException e1) {}
+				ini.setVisible(true);
+				ini.setLocationRelativeTo(null);
+				dispose();
 			}
 		});
 		btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -151,33 +145,37 @@ public class CRUDIntroduccion extends JFrame {
 		btnVolver.setBounds(202, 279, 106, 33);
 		contentPane.add(btnVolver);
 	}
+	
+	
+	public class InsertImg implements ActionListener {
 
-	/*
-	 * public class InsertImg implements ActionListener {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { AbstractButton jtname
-	 * = null; if (jtname.getText().equals("")) { ImageIcon icon = new
-	 * ImageIcon("images/warning.png"); JOptionPane.showMessageDialog(null,
-	 * "The crypto name cant be empty", "", JOptionPane.ERROR_MESSAGE, icon); } else
-	 * {
-	 * 
-	 * JFileChooser fileChooser = new JFileChooser();
-	 * fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-	 * 
-	 * FileNameExtensionFilter soloImg = new
-	 * FileNameExtensionFilter("JPG & PNG Images", "png", "png");
-	 * fileChooser.setFileFilter(soloImg);
-	 * 
-	 * fileChooser.showSaveDialog(null);
-	 * 
-	 * File imagenes = new File("images/" + jtname.getText() + ".png");
-	 * 
-	 * Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath(); Path
-	 * destination = imagenes.toPath();
-	 * 
-	 * try { if (!imagenes.exists()) Files.copy(sourcer, destination); } catch
-	 * (IOException e1) { e1.printStackTrace(); } }
-	 * 
-	 * } }
-	 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			AbstractButton jtname = (AbstractButton) e.getSource();
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+			fileChooser.setFileFilter(soloImg);
+
+			fileChooser.showSaveDialog(null);
+
+			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
+			
+			jtname.setText(sourcer.toString());
+			
+			File imagenes = new File(jtname.getText());
+			
+			Path destination = imagenes.toPath();
+
+			try {
+				if (!imagenes.exists())
+					Files.copy(sourcer, destination);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	 
+	 
 }
