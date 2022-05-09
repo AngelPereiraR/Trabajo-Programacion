@@ -75,7 +75,7 @@ public class CRUDActualizar extends JFrame {
 		contentPane.add(lblAnio);
 
 		txtAnio = new JTextField();
-		txtAnio.setBounds(116, 86, 192, 19);
+		txtAnio.setBounds(116, 46, 192, 19);
 		contentPane.add(txtAnio);
 		txtAnio.setColumns(10);
 		txtAnio.setText(String.valueOf(pelicula.getCodigo()));
@@ -86,7 +86,7 @@ public class CRUDActualizar extends JFrame {
 		contentPane.add(lblTitulo);
 
 		txtTitulo = new JTextField();
-		txtTitulo.setBounds(116, 46, 192, 19);
+		txtTitulo.setBounds(116, 86, 192, 19);
 		contentPane.add(txtTitulo);
 		txtTitulo.setColumns(10);
 		txtTitulo.setText(pelicula.getTitulo());
@@ -121,7 +121,13 @@ public class CRUDActualizar extends JFrame {
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				crudArray.remove(new Peliculas(pelicula.getCodigo(), pelicula.getTitulo(),pelicula.getGenero(),pelicula.getUsuario()));
+				int index = 0;
+				for(Peliculas p : crudArray) {
+					if(p.getCodigo()==pelicula.getCodigo() && p.getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && 
+							p.getGenero().equalsIgnoreCase(pelicula.getGenero())&& p.getUsuario().equalsIgnoreCase(pelicula.getUsuario()))
+						index = crudArray.indexOf(p);
+				}
+				crudArray.remove(crudArray.get(index));
 				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(),
 						txtGenero.getText(), txtUsuario2.getText()));
 
