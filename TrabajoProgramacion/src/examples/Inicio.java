@@ -2,16 +2,17 @@ package examples;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,6 +36,7 @@ public class Inicio extends JFrame {
 	private ObjectOutputStream os = null;
 	private ObjectInputStream is = null;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
+	private Peliculas peliSelec;
 
 	/**
 	 * Launch the application.
@@ -58,7 +60,8 @@ public class Inicio extends JFrame {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas)
+			throws ClassNotFoundException, IOException {
 		super("Películas");
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,10 +72,10 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 
-		if(arrayPeliculas == null) {
+		if (arrayPeliculas == null) {
 			arrayPeliculas = new ArrayList<>();
 		}
-		
+
 		this.arrayPeliculas = arrayPeliculas;
 
 		JPanel panel1 = new JPanel();
@@ -114,6 +117,22 @@ public class Inicio extends JFrame {
 		panel6.add(salir);
 		add(panel6);
 
+		// ManejadorTabla
+		tabla.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent Mouse_evt) {
+				JTable table = (JTable) Mouse_evt.getSource();
+				Point point = Mouse_evt.getPoint();
+				int row = table.rowAtPoint(point);
+				if (Mouse_evt.getClickCount() == 1) {
+					int anioSelec = Integer.parseInt((String) tabla.getValueAt(tabla.getSelectedRow(), 0));
+					String tituloSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 1);
+					String generoSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 2);
+					String usuarioSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 3);
+					peliSelec = new Peliculas(anioSelec, tituloSelec, generoSelec, usuarioSelec);
+				}
+			}
+		});
+
 		// ManejadorBotones
 		ManejadorBoton mb = new ManejadorBoton();
 		detalles.addActionListener(mb);
@@ -135,12 +154,12 @@ public class Inicio extends JFrame {
 		dt.setColumnIdentifiers(columnas);
 		try {
 			// Crea un array de Objetos peliculas
-			
+
 			// Bucle que lee todos los objetos del fichero binario
 			for (Peliculas p : arrayPeliculas) {
 				// Separa la informacion de cada la linea del fichero por ;
 				// o por cualquier caracter que se especifique
-				
+
 				// Array de datos separados por ;
 				String codigo = String.valueOf(p.getCodigo());
 				String titulo = p.getTitulo();
@@ -156,7 +175,8 @@ public class Inicio extends JFrame {
 				// Añadimos la fila a la tabla
 				dt.addRow(fila);
 			}
-		} catch (Exception ex) {}
+		} catch (Exception ex) {
+		}
 
 		// Establecemos el modelo establecido a la tabla
 		tabla.setModel(dt);
@@ -178,7 +198,7 @@ public class Inicio extends JFrame {
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (selec.equals(actualizar)) {
-				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas);
+				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -190,11 +210,13 @@ public class Inicio extends JFrame {
 				try {
 					fb = new File("TrabajoProgramacion/peliculas");
 					os = new ObjectOutputStream(new FileOutputStream(fb));
-				} catch (Exception ex) {}
+				} catch (Exception ex) {
+				}
 				try {
 					os.writeObject(arrayPeliculas);
 					os.close();
-				} catch (IOException e1) {}
+				} catch (IOException e1) {
+				}
 				System.exit(0);
 			}
 		}

@@ -27,11 +27,7 @@ import java.awt.event.ActionEvent;
 public class CRUDActualizar extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUsuario, txtContrasena, txtTelefono;
-	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
 	private JButton btnConfirmar, btnVolver;
 	private ArrayList<Peliculas> arrayPeliculas;
 
@@ -54,12 +50,14 @@ public class CRUDActualizar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
-		
-		//Mismo procedimiento que en detalles, la unica diferencia es que en vez de JLabel, los campos se rellenan en un 
+	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
+
+		// Mismo procedimiento que en detalles, la unica diferencia es que en vez de
+		// JLabel, los campos se rellenan en un
 		// JTextField
-		//crudArray de la pelicula seleccionada para relacionarla con el array tendría que tener los datos de esa película.
-		
+		// crudArray de la pelicula seleccionada para relacionarla con el array tendría
+		// que tener los datos de esa película.
+
 		setTitle("Actualizar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 355, 394);
@@ -67,79 +65,65 @@ public class CRUDActualizar extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		arrayPeliculas = crudArray;
-		this.txtUsuario = txtUsuario;
+		txtUsuario2 = txtUsuario;
 
-		JLabel JLabelAno = new JLabel("Año");
-		JLabelAno.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelAno.setBounds(28, 30, 78, 52);
-		contentPane.add(JLabelAno);
+		JLabel lblAnio = new JLabel("Año");
+		lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblAnio.setBounds(28, 30, 78, 52);
+		contentPane.add(lblAnio);
 
-		JLabel JLabelTitulo = new JLabel("Título");
-		JLabelTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelTitulo.setBounds(28, 76, 78, 41);
-		contentPane.add(JLabelTitulo);
+		txtAnio = new JTextField();
+		txtAnio.setBounds(116, 86, 192, 19);
+		contentPane.add(txtAnio);
+		txtAnio.setColumns(10);
+		txtAnio.setText(String.valueOf(pelicula.getCodigo()));
 
-		JLabel JLabelGenero = new JLabel("Género");
-		JLabelGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelGenero.setBounds(28, 114, 89, 56);
-		contentPane.add(JLabelGenero);
+		JLabel lblTitulo = new JLabel("Título");
+		lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblTitulo.setBounds(28, 76, 78, 41);
+		contentPane.add(lblTitulo);
 
-		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblNewLabel.setBounds(28, 164, 78, 46);
-		contentPane.add(lblNewLabel);
-		
-		//Una vez con la pelicula seleccionada usamos la implementación para rellenar los campos.
-		//Como lo que hemos almacenado en el array es un Objeto peliculas, usamos los métodos de la clase con el mismo nombre.
-				
-		// Para el grupo
-		//Necesito acceder al Objeto pelicula de la creada en el array
-		//Uso esto pero no me funciona, crudArray.getClass(); estoy pillado con esto.
-		//Una vez dentro, acceder a los métodos de la clase pelicula getTitulo, getCodigo..etc para rellenar los campos.
+		txtTitulo = new JTextField();
+		txtTitulo.setBounds(116, 46, 192, 19);
+		contentPane.add(txtTitulo);
+		txtTitulo.setColumns(10);
+		txtTitulo.setText(pelicula.getTitulo());
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(116, 86, 192, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		JLabel lblGenero = new JLabel("Género");
+		lblGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblGenero.setBounds(28, 114, 89, 56);
+		contentPane.add(lblGenero);
 
-		textField = new JTextField();
-		textField.setBounds(116, 46, 192, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtGenero = new JTextField();
+		txtGenero.setBounds(116, 132, 192, 19);
+		contentPane.add(txtGenero);
+		txtGenero.setColumns(10);
+		txtGenero.setText(pelicula.getGenero());
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(116, 132, 192, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		JLabel lblUsuario = new JLabel("Usuario");
+		lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblUsuario.setBounds(28, 164, 78, 46);
+		contentPane.add(lblUsuario);
 
-		
-		textField_3 = new JTextField(); 
-		textField_3.setBounds(116, 177, 192, 19);
-		contentPane.add(textField_3); 
-		textField_3.setColumns(10); 
-		
-		
-	
+		txtUsuario2 = new JTextField();
+		txtUsuario2.setBounds(116, 177, 192, 19);
+		contentPane.add(txtUsuario2);
+		txtUsuario2.setColumns(10);
+		txtUsuario2.setText(pelicula.getUsuario());
 
-		JLabel JLabelImagen = new JLabel("Imagen");
-		JLabelImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelImagen.setBounds(28, 220, 78, 33);
-		contentPane.add(JLabelImagen);
+		JLabel lblImagen = new JLabel("Imagen");
+		lblImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblImagen.setBounds(28, 220, 78, 33);
+		contentPane.add(lblImagen);
 
-		//Usuario -- Realmente si ya accedemos al Usuario creado en el Array esto no hace falta
-		// pero está puesto para que no de error en el commit.
-		// ??
-		
-		
-		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				crudArray.add(new Peliculas(Integer.parseInt(textField_1.getText()), textField.getText(), textField_2.getText(), textField_3.getText()));
+				crudArray.remove(new Peliculas(pelicula.getCodigo(), pelicula.getTitulo(),pelicula.getGenero(),pelicula.getUsuario()));
+				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(),
+						txtGenero.getText(), txtUsuario2.getText()));
 
 				Inicio ini = null;
 				try {
