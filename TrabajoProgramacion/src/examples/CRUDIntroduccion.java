@@ -113,7 +113,7 @@ public class CRUDIntroduccion extends JFrame {
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), txtGenero.getText(), JLabelImagen.getText(), btnRuta.getText()));
+				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), txtGenero.getText(), txtUsuario.getText(), btnRuta.getText()));
 
 				Inicio ini = null;
 				try {

@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class CRUDDetalles extends JFrame {
+public class Estadisticas extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel txtUsuario2, txtAnio, txtTitulo, txtGenero;
@@ -27,7 +26,7 @@ public class CRUDDetalles extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					CRUDDetalles frame = new CRUDDetalles(null, null, null);
@@ -36,13 +35,13 @@ public class CRUDDetalles extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*/
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public CRUDDetalles(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
+	/*public Estadisticas(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
 		setTitle("Detalles");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 541, 357);
@@ -117,4 +116,6 @@ public class CRUDDetalles extends JFrame {
 		btnVolver.setBounds(374, 264, 106, 33);
 		contentPane.add(btnVolver);
 	}
+	*/
 }
+

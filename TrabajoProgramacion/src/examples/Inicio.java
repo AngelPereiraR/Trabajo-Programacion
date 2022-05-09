@@ -18,6 +18,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -145,7 +146,7 @@ public class Inicio extends JFrame {
 
 	public void rellenarTabla() throws IOException, ClassNotFoundException {
 		dt = new DefaultTableModel();
-		String[] columnas = { "CÓDIGO", "TÍTULO", "GÉNERO", "USUARIO", "RUTA IMAGEN" };
+		String[] columnas = { "AÑO", "TÍTULO", "GÉNERO", "USUARIO", "RUTA IMAGEN" };
 		dt.setColumnIdentifiers(columnas);
 		try {
 			for (Peliculas p : arrayPeliculas) {
@@ -177,7 +178,7 @@ public class Inicio extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JButton selec = (JButton) e.getSource();
 			if (selec.equals(detalles)) {
-				CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas);
+				CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas, peliSelec);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -192,7 +193,11 @@ public class Inicio extends JFrame {
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (selec.equals(eliminar)) {
-
+				CRUDEliminar frame = new CRUDEliminar(txtUsuario, arrayPeliculas, peliSelec);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+					
 			} else if (selec.equals(estadistica)) {
 
 			} else if (selec.equals(salir)) {
