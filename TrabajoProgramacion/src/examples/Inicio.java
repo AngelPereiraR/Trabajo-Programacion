@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -13,12 +15,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,10 +32,11 @@ import javax.swing.table.DefaultTableModel;
 public class Inicio extends JFrame {
 
 	private JPanel contentPane;
-	private JLabel usuario;
+	private JLabel usuario, lblFiltro;
 	private JTextField txtUsuario;
 	private JButton detalles, introducir, actualizar, eliminar, estadistica, salir;
 	private JTable tabla;
+	private JComboBox comboFiltros;
 	private DefaultTableModel dt;
 	private File fb;
 	private ObjectOutputStream os = null;
@@ -88,6 +92,37 @@ public class Inicio extends JFrame {
 		panel1.add(this.txtUsuario);
 		add(panel1);
 
+		JPanel panelF = new JPanel();
+		lblFiltro = new JLabel("Ordenar tabla por: ");
+		panelF.add(lblFiltro);
+		
+		String[] filtros = { "Por defecto", "Título A-Z","Título Z-A", "Género A-Z", "Año" };
+		comboFiltros = new JComboBox(filtros);
+		//MAXIMO DE FILAS A MOSTRAR
+		comboFiltros.setMaximumRowCount(4);
+		//ELEMENTO QUE DEJAMOS SELECCIONADA POR DEFECTO
+		comboFiltros.setSelectedIndex(0);
+		//handler 
+		comboFiltros.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evento) {
+				if (comboFiltros.getSelectedItem().equals("Por defecto")) {
+					
+				} else if (comboFiltros.getSelectedItem().equals("Título A-Z")) {
+
+				} else if (comboFiltros.getSelectedItem().equals("Título Z-A")) {
+
+				} else if (comboFiltros.getSelectedItem().equals("Género A-Z")) {
+
+				} else if (comboFiltros.getSelectedItem().equals("Año")) {
+
+				} else {
+
+				}
+			}
+		});
+		panelF.add(comboFiltros);
+		add(panelF);
+		
 		JPanel panel2 = new JPanel();
 		tabla = new JTable();
 		tabla.setFillsViewportHeight(true);
@@ -168,7 +203,6 @@ public class Inicio extends JFrame {
 			}
 		} catch (Exception ex) {
 		}
-
 		tabla.setModel(dt);
 	}
 
