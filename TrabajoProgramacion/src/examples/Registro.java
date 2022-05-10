@@ -131,7 +131,7 @@ public class Registro extends JFrame {
 									}
 									catch (Exception ex) {}
 								}
-								Inicio frame = new Inicio(txtUsuario, null);
+								Inicio frame = new Inicio(txtUsuario, arrayPeliculasFichero);
 								frame.setVisible(true);
 								dispose();
 							}

@@ -29,7 +29,7 @@ public class CRUDIntroduccion extends JFrame {
 	private JTextField txtUsuario2, txtAnio, txtTitulo;
 	private JButton btnConfirmar, btnVolver, btnRuta;
 	private ArrayList<Peliculas> arrayPeliculas;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +37,7 @@ public class CRUDIntroduccion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CRUDIntroduccion frame = new CRUDIntroduccion(null, null);
+					CRUDIntroduccion frame = new CRUDIntroduccion(null, null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class CRUDIntroduccion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CRUDIntroduccion(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
+	public CRUDIntroduccion(JTextField txtUsuario, ArrayList<Peliculas> crudArray, String [] matrizGeneros) {
 		setTitle("Creación");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 355, 394);
@@ -63,21 +63,21 @@ public class CRUDIntroduccion extends JFrame {
 
 		JLabel JLabelAno = new JLabel("Año");
 		JLabelAno.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelAno.setBounds(28, 30, 78, 41);
+		JLabelAno.setBounds(28, 79, 78, 41);
 		contentPane.add(JLabelAno);
 		
 		txtAnio = new JTextField();
-		txtAnio.setBounds(116, 46, 192, 19);
+		txtAnio.setBounds(116, 92, 192, 19);
 		contentPane.add(txtAnio);
 		txtAnio.setColumns(10);
 
 		JLabel JLabelTitulo = new JLabel("Título");
 		JLabelTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		JLabelTitulo.setBounds(28, 76, 78, 52);
+		JLabelTitulo.setBounds(28, 27, 78, 52);
 		contentPane.add(JLabelTitulo);
 		
 		txtTitulo = new JTextField();
-		txtTitulo.setBounds(116, 92, 192, 19);
+		txtTitulo.setBounds(116, 46, 192, 19);
 		contentPane.add(txtTitulo);
 		txtTitulo.setColumns(10);
 
@@ -86,10 +86,9 @@ public class CRUDIntroduccion extends JFrame {
 		JLabelGenero.setBounds(28, 114, 89, 56);
 		contentPane.add(JLabelGenero);
 
-		//Poner los generos
-		String[] generos = { "Ciencia Ficción", "Terror","Drama", "Aventura", "Acción", "Comedia", "Romántica" };
+		//Pone los generos
 		
-		JComboBox comboBox = new JComboBox(generos);
+		JComboBox comboBox = new JComboBox(matrizGeneros);
 		comboBox.setBounds(116, 134, 192, 21);
 		comboBox.setMaximumRowCount(7);
 		comboBox.setSelectedIndex(0);

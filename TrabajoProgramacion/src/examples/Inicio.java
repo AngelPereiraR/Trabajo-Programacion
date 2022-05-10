@@ -43,6 +43,8 @@ public class Inicio extends JFrame {
 	private ObjectInputStream is = null;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
 	private Peliculas peliSelec;
+	private static String [] matrizGeneros = {"Ciencia Ficción", "Terror","Drama", "Aventura", "Acción", "Comedia", "Romántica", "Suspense"};
+
 
 	/**
 	 * Launch the application.
@@ -178,6 +180,12 @@ public class Inicio extends JFrame {
 		salir.addActionListener(mb);
 
 	}
+	
+	//para acceder desde otra clase. pero tengo dudas si acceder desde el mismo atributo llamandolo public.
+	
+	public static String [] getGeneroPelicula () {
+		return matrizGeneros;
+	}
 
 	public void rellenarTabla() throws IOException, ClassNotFoundException {
 		dt = new DefaultTableModel();
@@ -217,12 +225,13 @@ public class Inicio extends JFrame {
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (selec.equals(introducir)) {
-				CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas);
+				CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas, matrizGeneros);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
+				
 			} else if (selec.equals(actualizar)) {
-				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec);
+				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec, matrizGeneros);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -250,4 +259,5 @@ public class Inicio extends JFrame {
 		}
 
 	}
+	
 }

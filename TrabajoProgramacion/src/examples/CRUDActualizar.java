@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,9 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import examples.CRUDIntroduccion.InsertImg;
-
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,7 +41,7 @@ public class CRUDActualizar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CRUDIntroduccion frame = new CRUDIntroduccion(null, null);
+					CRUDActualizar frame = new CRUDActualizar(null, null, null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +53,7 @@ public class CRUDActualizar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
+	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula, String [] matrizGeneros) {
 		setTitle("Actualizar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 355, 394);
@@ -66,22 +67,22 @@ public class CRUDActualizar extends JFrame {
 
 		JLabel lblAnio = new JLabel("Año");
 		lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblAnio.setBounds(28, 30, 78, 52);
+		lblAnio.setBounds(28, 67, 78, 52);
 		contentPane.add(lblAnio);
 
 		txtAnio = new JTextField();
-		txtAnio.setBounds(116, 46, 192, 19);
+		txtAnio.setBounds(116, 86, 192, 19);
 		contentPane.add(txtAnio);
 		txtAnio.setColumns(10);
 		txtAnio.setText(String.valueOf(pelicula.getCodigo()));
 
 		JLabel lblTitulo = new JLabel("Título");
 		lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblTitulo.setBounds(28, 76, 78, 41);
+		lblTitulo.setBounds(28, 21, 78, 41);
 		contentPane.add(lblTitulo);
 
 		txtTitulo = new JTextField();
-		txtTitulo.setBounds(116, 86, 192, 19);
+		txtTitulo.setBounds(116, 34, 192, 19);
 		contentPane.add(txtTitulo);
 		txtTitulo.setColumns(10);
 		txtTitulo.setText(pelicula.getTitulo());
@@ -91,6 +92,18 @@ public class CRUDActualizar extends JFrame {
 		lblGenero.setBounds(28, 114, 89, 56);
 		contentPane.add(lblGenero);
 
+		JComboBox comboBox = new JComboBox(matrizGeneros);
+		comboBox.setBounds(116, 134, 192, 21);
+		comboBox.setMaximumRowCount(7);
+		comboBox.setSelectedIndex(0);
+		contentPane.add(comboBox);
+		
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evento) {
+				JComboBox combo = (JComboBox) evento.getSource();
+			}
+		});
+		
 		txtGenero = new JTextField();
 		txtGenero.setBounds(116, 132, 192, 19);
 		contentPane.add(txtGenero);
@@ -125,13 +138,16 @@ public class CRUDActualizar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int index = 0;
 				for(Peliculas p : crudArray) {
+					
+					//aquí falla algo
 					if(p.getCodigo()==pelicula.getCodigo() && p.getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && 
 							p.getGenero().equalsIgnoreCase(pelicula.getGenero())&& p.getUsuario().equalsIgnoreCase(pelicula.getUsuario()) && p.getRuta().equals(pelicula.getRuta()))
 						index = crudArray.indexOf(p);
 				}
 				crudArray.remove(crudArray.get(index));
+				//aqui falla algo también
 				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(),
-						txtGenero.getText(), txtUsuario2.getText(), btnRuta.getText()));
+						(String) comboBox.getSelectedItem(), txtUsuario2.getText(), btnRuta.getText()));
 
 				Inicio ini = null;
 				try {

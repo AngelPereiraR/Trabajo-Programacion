@@ -2,3 +2,6 @@
 Ángel;es;123456789
 Wolf;as;666545454
 Pepe;es;123456789
+Spartacus;cuarri;666228833
+Spike;cero;666111222
+Kike;boom;663878787
