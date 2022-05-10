@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,11 +21,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JComboBox;
 
 public class CRUDIntroduccion extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
+	private JTextField txtUsuario2, txtAnio, txtTitulo;
 	private JButton btnConfirmar, btnVolver, btnRuta;
 	private ArrayList<Peliculas> arrayPeliculas;
 
@@ -82,12 +85,23 @@ public class CRUDIntroduccion extends JFrame {
 		JLabelGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		JLabelGenero.setBounds(28, 114, 89, 56);
 		contentPane.add(JLabelGenero);
-		
-		txtGenero = new JTextField();
-		txtGenero.setBounds(116, 132, 192, 19);
-		contentPane.add(txtGenero);
-		txtGenero.setColumns(10);
 
+		//Poner los generos
+		String[] generos = { "Ciencia Ficción", "Terror","Drama", "Aventura", "Acción", "Comedia", "Romántica" };
+		
+		JComboBox comboBox = new JComboBox(generos);
+		comboBox.setBounds(116, 134, 192, 21);
+		comboBox.setMaximumRowCount(7);
+		comboBox.setSelectedIndex(0);
+		contentPane.add(comboBox);
+		
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evento) {
+				JComboBox combo = (JComboBox) evento.getSource();
+			}
+		});
+		
+		
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblNewLabel.setBounds(28, 164, 78, 46);
@@ -113,8 +127,8 @@ public class CRUDIntroduccion extends JFrame {
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), txtGenero.getText(), txtUsuario.getText(), btnRuta.getText()));
-
+				crudArray.add(new Peliculas(Integer.parseInt(txtAnio.getText()), txtTitulo.getText(), (String) comboBox.getSelectedItem(), txtUsuario.getText(), btnRuta.getText()));
+				
 				Inicio ini = null;
 				try {
 					ini = new Inicio(txtUsuario, crudArray);
@@ -144,6 +158,7 @@ public class CRUDIntroduccion extends JFrame {
 		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(202, 279, 106, 33);
 		contentPane.add(btnVolver);
+		
 	}
 	
 	
@@ -176,6 +191,4 @@ public class CRUDIntroduccion extends JFrame {
 			}
 		}
 	}
-	 
-	 
 }
