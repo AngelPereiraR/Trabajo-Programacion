@@ -42,9 +42,10 @@ public class Inicio extends JFrame {
 	private ObjectOutputStream os = null;
 	private ObjectInputStream is = null;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
+	private ArrayList<Peliculas> listOrdenada = new ArrayList<>();
 	private Peliculas peliSelec;
-	private static String [] matrizGeneros = {"Ciencia Ficción", "Terror","Drama", "Aventura", "Acción", "Comedia", "Romántica", "Suspense"};
-
+	private static String[] matrizGeneros = { "Ciencia Ficción", "Terror", "Drama", "Aventura", "Acción", "Comedia",
+			"Romántica", "Suspense" };
 
 	/**
 	 * Launch the application.
@@ -68,7 +69,8 @@ public class Inicio extends JFrame {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas) throws ClassNotFoundException, IOException {
+	public Inicio(JTextField txtUsuario, ArrayList<Peliculas> arrayPeliculas)
+			throws ClassNotFoundException, IOException {
 		super("Películas");
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,6 +86,7 @@ public class Inicio extends JFrame {
 		}
 
 		this.arrayPeliculas = arrayPeliculas;
+		this.listOrdenada = arrayPeliculas;
 
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario:");
@@ -97,34 +100,67 @@ public class Inicio extends JFrame {
 		JPanel panelF = new JPanel();
 		lblFiltro = new JLabel("Ordenar tabla por: ");
 		panelF.add(lblFiltro);
-		
-		String[] filtros = { "Por defecto", "Título A-Z","Título Z-A", "Género A-Z", "Año" };
+
+		String[] filtros = { "Título A-Z", "Título Z-A", "Género A-Z", "Año" };
 		comboFiltros = new JComboBox(filtros);
-		//MAXIMO DE FILAS A MOSTRAR
 		comboFiltros.setMaximumRowCount(4);
-		//ELEMENTO QUE DEJAMOS SELECCIONADA POR DEFECTO
 		comboFiltros.setSelectedIndex(0);
-		//handler 
 		comboFiltros.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent evento) {
-				if (comboFiltros.getSelectedItem().equals("Por defecto")) {
-					
-				} else if (comboFiltros.getSelectedItem().equals("Título A-Z")) {
-
+				if (comboFiltros.getSelectedItem().equals("Título A-Z")) {
+					listOrdenada = (ArrayList<Peliculas>) listOrdenada.stream()
+							.sorted(Comparator.comparing(Peliculas::getTitulo)).collect(Collectors.toList());
+					try {
+						rellenarTabla();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else if (comboFiltros.getSelectedItem().equals("Título Z-A")) {
-
+					listOrdenada = (ArrayList<Peliculas>) listOrdenada.stream()
+							.sorted(Comparator.comparing(Peliculas::getTitulo).reversed()).collect(Collectors.toList());
+					try {
+						rellenarTabla();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else if (comboFiltros.getSelectedItem().equals("Género A-Z")) {
-
+					listOrdenada = (ArrayList<Peliculas>) listOrdenada.stream()
+							.sorted(Comparator.comparing(Peliculas::getGenero)).collect(Collectors.toList());
+					try {
+						rellenarTabla();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else if (comboFiltros.getSelectedItem().equals("Año")) {
-
-				} else {
-
+					listOrdenada = (ArrayList<Peliculas>) listOrdenada.stream()
+							.sorted(Comparator.comparing(Peliculas::getCodigo)).collect(Collectors.toList());
+					try {
+						rellenarTabla();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
 		panelF.add(comboFiltros);
 		add(panelF);
-		
+
 		JPanel panel2 = new JPanel();
 		tabla = new JTable();
 		tabla.setFillsViewportHeight(true);
@@ -180,10 +216,11 @@ public class Inicio extends JFrame {
 		salir.addActionListener(mb);
 
 	}
-	
-	//para acceder desde otra clase. pero tengo dudas si acceder desde el mismo atributo llamandolo public.
-	
-	public static String [] getGeneroPelicula () {
+
+	// para acceder desde otra clase. pero tengo dudas si acceder desde el mismo
+	// atributo llamandolo public.
+
+	public static String[] getGeneroPelicula() {
 		return matrizGeneros;
 	}
 
@@ -192,21 +229,21 @@ public class Inicio extends JFrame {
 		String[] columnas = { "AÑO", "TÍTULO", "GÉNERO", "USUARIO", "RUTA IMAGEN" };
 		dt.setColumnIdentifiers(columnas);
 		try {
-			for (Peliculas p : arrayPeliculas) {
+			for (Peliculas p : listOrdenada) {
 				String codigo = String.valueOf(p.getCodigo());
 				String titulo = p.getTitulo();
 				String genero = p.getGenero();
 				String usuario = p.getUsuario();
 				String ruta = p.getRuta();
-				
+
 				Object[] fila = new Object[5];
-				
+
 				fila[0] = codigo;
 				fila[1] = titulo;
 				fila[2] = genero;
 				fila[3] = usuario;
 				fila[4] = ruta;
-				
+
 				dt.addRow(fila);
 			}
 		} catch (Exception ex) {
@@ -229,7 +266,7 @@ public class Inicio extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-				
+
 			} else if (selec.equals(actualizar)) {
 				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec, matrizGeneros);
 				frame.setVisible(true);
@@ -240,7 +277,7 @@ public class Inicio extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-					
+
 			} else if (selec.equals(estadistica)) {
 
 			} else if (selec.equals(salir)) {
@@ -259,5 +296,5 @@ public class Inicio extends JFrame {
 		}
 
 	}
-	
+
 }
