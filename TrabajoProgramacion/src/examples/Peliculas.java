@@ -1,10 +1,6 @@
 package examples;
 
-import java.io.File;
 import java.io.Serializable;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 public class Peliculas implements Serializable {
 	private int codigo;

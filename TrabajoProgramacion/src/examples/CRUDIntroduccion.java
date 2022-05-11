@@ -30,9 +30,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CRUDIntroduccion extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUsuario2, txtAnio, txtTitulo;
+	private JTextField txtAnio, txtTitulo;
 	private JButton btnConfirmar, btnVolver, btnRuta;
-	private ArrayList<Peliculas> arrayPeliculas;
 
 	/**
 	 * Create the frame.
@@ -48,9 +47,6 @@ public class CRUDIntroduccion extends JFrame {
 		
 		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
 		setIconImage(icono);
-		
-		txtUsuario2 = txtUsuario;
-		arrayPeliculas = crudArray;
 
 		JLabel JLabelAno = new JLabel("Año:");
 		JLabelAno.setFont(new Font("Times New Roman", Font.BOLD, 15));

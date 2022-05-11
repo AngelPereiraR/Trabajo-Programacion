@@ -1,6 +1,5 @@
 package examples;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -24,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -197,13 +197,17 @@ public class Inicio extends JFrame {
 				JTable table = (JTable) Mouse_evt.getSource();
 				Point point = Mouse_evt.getPoint();
 				int row = table.rowAtPoint(point);
-				if (Mouse_evt.getClickCount() == 1) {
-					int anioSelec = Integer.parseInt((String) tabla.getValueAt(tabla.getSelectedRow(), 0));
-					String tituloSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 1);
-					String generoSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 2);
-					String usuarioSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 3);
-					String rutaSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 4);
-					peliSelec = new Peliculas(anioSelec, tituloSelec, generoSelec, usuarioSelec, rutaSelec);
+				try {
+					if (Mouse_evt.getClickCount() == 1) {
+						int anioSelec = Integer.parseInt((String) tabla.getValueAt(tabla.getSelectedRow(), 0));
+						String tituloSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 1);
+						String generoSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 2);
+						String usuarioSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 3);
+						String rutaSelec = (String) tabla.getValueAt(tabla.getSelectedRow(), 4);
+						peliSelec = new Peliculas(anioSelec, tituloSelec, generoSelec, usuarioSelec, rutaSelec);
+					}
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Debes seleccionar una película de la tabla con anterioridad.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -250,46 +254,44 @@ public class Inicio extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton selec = (JButton) e.getSource();
-			if (selec.equals(detalles)) {
-				CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas, peliSelec);
-				//frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-			} else if (selec.equals(introducir)) {
-				CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas, matrizGeneros);
-				//frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-
-			} else if (selec.equals(actualizar)) {
-				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec, matrizGeneros);
-				//frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-			} else if (selec.equals(eliminar)) {
-				CRUDEliminar frame = new CRUDEliminar(txtUsuario, arrayPeliculas, peliSelec);
-				//frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-
-			} else if (selec.equals(estadistica)) {
-				Estadisticas frame = new Estadisticas(txtUsuario, arrayPeliculas, matrizGeneros);
-				//frame.setVisible(true);
-				frame.setLocationRelativeTo(null);
-				dispose();
-			} else if (selec.equals(salir)) {
-				try {
-					fb = new File("TrabajoProgramacion/peliculas");
-					os = new ObjectOutputStream(new FileOutputStream(fb));
-				} catch (Exception ex) {
+			try {
+				if (selec.equals(detalles)) {
+					CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas, peliSelec);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				} else if (selec.equals(introducir)) {
+					CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas, matrizGeneros);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				} else if (selec.equals(actualizar)) {
+					CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec, matrizGeneros);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				} else if (selec.equals(eliminar)) {
+					CRUDEliminar frame = new CRUDEliminar(txtUsuario, arrayPeliculas, peliSelec);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				} else if (selec.equals(estadistica)) {
+					Estadisticas frame = new Estadisticas(txtUsuario, arrayPeliculas, matrizGeneros);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				} else if (selec.equals(salir)) {
+					try {
+						fb = new File("TrabajoProgramacion/peliculas");
+						os = new ObjectOutputStream(new FileOutputStream(fb));
+					} catch (Exception ex) {
+					}
+					try {
+						os.writeObject(arrayPeliculas);
+						os.close();
+					} catch (IOException e1) {
+					}
+					System.exit(0);
 				}
-				try {
-					os.writeObject(arrayPeliculas);
-					os.close();
-				} catch (IOException e1) {
-				}
-				System.exit(0);
+			}catch(Exception ex) {
+				JOptionPane.showMessageDialog(null, "Debes seleccionar una película de la tabla con anterioridad.", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
+			
 		}
 
 	}

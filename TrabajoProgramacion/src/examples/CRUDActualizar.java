@@ -1,8 +1,6 @@
 package examples;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -16,13 +14,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import examples.CRUDIntroduccion.InsertImg;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -39,7 +34,6 @@ public class CRUDActualizar extends JFrame {
 	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
 	private JTextField txtUsuario2_1;
 	private JButton btnConfirmar, btnVolver, btnRuta;
-	private ArrayList<Peliculas> arrayPeliculas;
 
 	/**
 	 * Create the frame.
@@ -56,7 +50,6 @@ public class CRUDActualizar extends JFrame {
 		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
 		setIconImage(icono);
 
-		arrayPeliculas = crudArray;
 		txtUsuario2 = txtUsuario;
 
 		JLabel lblAnio = new JLabel("Año:");
@@ -92,7 +85,7 @@ public class CRUDActualizar extends JFrame {
 		comboBox.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		comboBox.setBounds(116, 134, 192, 21);
 		comboBox.setMaximumRowCount(7);
-		comboBox.setSelectedIndex(0);
+		comboBox.setSelectedItem(pelicula.getGenero());
 		contentPane.add(comboBox);
 		
 		comboBox.addItemListener(new ItemListener() {
@@ -135,6 +128,7 @@ public class CRUDActualizar extends JFrame {
 		getContentPane().add(btnRuta);
 		InsertImg insertImg = new InsertImg();
 		btnRuta.addActionListener(insertImg);
+		btnRuta.setText(pelicula.getRuta());
 		
 
 		btnConfirmar = new JButton("Confirmar");

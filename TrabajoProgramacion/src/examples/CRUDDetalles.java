@@ -1,6 +1,5 @@
 package examples;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -9,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,8 +20,7 @@ public class CRUDDetalles extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel txtUsuario2, txtAnio, txtTitulo, txtGenero;
-	private JButton btnConfirmar, btnVolver, btnRuta;
-	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
+	private JButton btnVolver;
 
 	/**
 	 * Create the frame.
@@ -40,7 +37,6 @@ public class CRUDDetalles extends JFrame {
 		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
 		setIconImage(icono);
 
-		arrayPeliculas = crudArray;
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setFont(new Font("Times New Roman", Font.BOLD, 15));

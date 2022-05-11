@@ -1,6 +1,5 @@
 package examples;
 
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;

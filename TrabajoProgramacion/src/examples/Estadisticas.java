@@ -1,6 +1,5 @@
 package examples;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -11,27 +10,15 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-/*
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
-*/
-import javax.swing.border.EmptyBorder;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
-import java.awt.BorderLayout;
 
 public class Estadisticas extends JFrame {
 
-	private JPanel contentPane;
-	private JButton btnVolver, btnRuta;
-	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
 	private int[] matrizNumGeneros;
 
 	/**
@@ -42,10 +29,6 @@ public class Estadisticas extends JFrame {
 		
 		setSize(524, 477);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);*/
 		
 		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
 		setIconImage(icono);
@@ -60,23 +43,21 @@ public class Estadisticas extends JFrame {
 			}
 		}
 
-		// matrizGeneros = { "Ciencia Ficción", "Terror", "Drama", "Aventura", "Acción",
-		// "Comedia", "Romántica", "Suspense" };
-
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		dataset.setValue("Ciencia Ficción", new Integer(matrizNumGeneros[0]));
 		dataset.setValue("Terror", new Integer(matrizNumGeneros[1]));
 		dataset.setValue("Drama", new Integer(matrizNumGeneros[2]));
 		dataset.setValue("Aventura", new Integer(matrizNumGeneros[3]));
-		dataset.setValue("Comedia", new Integer(matrizNumGeneros[4]));
-		dataset.setValue("Romántica", new Integer(matrizNumGeneros[5]));
-		dataset.setValue("Suspense", new Integer(matrizNumGeneros[6]));
+		dataset.setValue("Acción", new Integer(matrizNumGeneros[4]));
+		dataset.setValue("Comedia", new Integer(matrizNumGeneros[5]));
+		dataset.setValue("Romántica", new Integer(matrizNumGeneros[6]));
+		dataset.setValue("Suspense", new Integer(matrizNumGeneros[7]));
 
-		JFreeChart chart = ChartFactory.createPieChart(// char t
+		JFreeChart chart = ChartFactory.createPieChart(
 
-				"Peliculas por Género", // title
-				dataset, // data
-				true, // include legend
+				"Peliculas por Género",
+				dataset,
+				true,
 				true, false);
 		getContentPane().setLayout(null);
 
@@ -103,7 +84,6 @@ public class Estadisticas extends JFrame {
 		});
 		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(200, 414, 91, 21);
-		contentPane.add(btnVolver);
 		
 		setVisible(true);
 

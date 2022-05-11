@@ -1,37 +1,26 @@
 package examples;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
-import javax.swing.AbstractButton;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import examples.CRUDActualizar.InsertImg;
 
 public class CRUDEliminar extends JFrame {
 	
 	private JPanel contentPane;
-	private JTextField txtUsuario2, txtAnio, txtTitulo, txtGenero;
 	private JButton btnConfirmar, btnNegacion;
-	private ArrayList<Peliculas> arrayPeliculas;
 	private JLabel lblNewLabel;
 	
 	public CRUDEliminar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
@@ -46,19 +35,20 @@ public class CRUDEliminar extends JFrame {
 		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
 		setIconImage(icono);
 
-		arrayPeliculas = crudArray;
-		txtUsuario2 = txtUsuario;
-
 		btnConfirmar = new JButton("Sí");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = 0;
-				for(Peliculas p : crudArray) {
-					if(p.getCodigo()==pelicula.getCodigo() && p.getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && 
-							p.getGenero().equalsIgnoreCase(pelicula.getGenero())&& p.getUsuario().equalsIgnoreCase(pelicula.getUsuario()) && p.getRuta().equals(pelicula.getRuta()))
-						index = crudArray.indexOf(p);
+				try {
+					for(Peliculas p : crudArray) {
+						if(p.getCodigo()==pelicula.getCodigo() && p.getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && 
+								p.getGenero().equalsIgnoreCase(pelicula.getGenero())&& p.getUsuario().equalsIgnoreCase(pelicula.getUsuario()) && p.getRuta().equals(pelicula.getRuta()))
+							index = crudArray.indexOf(p);
+					}
+					crudArray.remove(crudArray.get(index));
+				} catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Debes seleccionar una película de la tabla con anterioridad.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
-				crudArray.remove(crudArray.get(index));
 				Inicio ini = null;
 				try {
 					ini = new Inicio(txtUsuario, crudArray);
