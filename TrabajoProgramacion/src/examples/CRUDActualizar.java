@@ -1,11 +1,13 @@
 package examples;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import examples.CRUDIntroduccion.InsertImg;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -50,7 +54,7 @@ public class CRUDActualizar extends JFrame {
 		txtUsuario2 = txtUsuario;
 
 		JLabel lblAnio = new JLabel("Año");
-		lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblAnio.setBounds(28, 67, 78, 52);
 		contentPane.add(lblAnio);
 
@@ -61,7 +65,7 @@ public class CRUDActualizar extends JFrame {
 		txtAnio.setText(String.valueOf(pelicula.getCodigo()));
 
 		JLabel lblTitulo = new JLabel("Título");
-		lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblTitulo.setBounds(28, 21, 78, 41);
 		contentPane.add(lblTitulo);
 
@@ -72,7 +76,7 @@ public class CRUDActualizar extends JFrame {
 		txtTitulo.setText(pelicula.getTitulo());
 
 		JLabel lblGenero = new JLabel("Género");
-		lblGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//lblGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblGenero.setBounds(28, 114, 89, 56);
 		contentPane.add(lblGenero);
 
@@ -95,7 +99,7 @@ public class CRUDActualizar extends JFrame {
 		txtGenero.setText(pelicula.getGenero());
 
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblUsuario.setBounds(28, 164, 78, 46);
 		contentPane.add(lblUsuario);
 
@@ -106,16 +110,21 @@ public class CRUDActualizar extends JFrame {
 		txtUsuario2.setText(pelicula.getUsuario());
 
 		JLabel lblImagen = new JLabel("Imagen");
-		lblImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//lblImagen.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblImagen.setBounds(28, 220, 78, 33);
 		contentPane.add(lblImagen);
 		
-		btnRuta = new JButton(pelicula.getRuta());
+		Icon lupa = new ImageIcon("TrabajoProgramacion/images/lupa.png");
+		
+		btnRuta = new JButton("",lupa);
 		btnRuta.setToolTipText("Buscar archivo");
-		btnRuta.setBounds(116, 225, 192, 19);
+		btnRuta.setBackground(new Color(238,238,238));
+		btnRuta.setBorderPainted(false);
+		btnRuta.setBounds(116, 222, 51, 46);
 		getContentPane().add(btnRuta);
 		InsertImg insertImg = new InsertImg();
 		btnRuta.addActionListener(insertImg);
+		
 
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
@@ -143,7 +152,7 @@ public class CRUDActualizar extends JFrame {
 				dispose();
 			}
 		});
-		btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnConfirmar.setBounds(28, 279, 115, 33);
 		contentPane.add(btnConfirmar);
 
@@ -160,7 +169,7 @@ public class CRUDActualizar extends JFrame {
 				dispose();
 			}
 		});
-		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		//btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(202, 279, 106, 33);
 		contentPane.add(btnVolver);
 	}

@@ -62,7 +62,7 @@ public class CRUDEliminar extends JFrame {
 				dispose();
 			}
 		});
-		btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+//		btnConfirmar.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnConfirmar.setBounds(40, 73, 57, 33);
 		contentPane.add(btnConfirmar);
 
@@ -79,7 +79,7 @@ public class CRUDEliminar extends JFrame {
 				dispose();
 			}
 		});
-		btnNegacion.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+//		btnNegacion.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnNegacion.setBounds(103, 73, 67, 33);
 		contentPane.add(btnNegacion);
 		

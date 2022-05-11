@@ -39,8 +39,8 @@ public class CRUDDetalles extends JFrame {
 		arrayPeliculas = crudArray;
 		//txtUsuario2 = txtUsuario;
 		
-		JLabel lblUsuario = new JLabel("#Usuario");
-		lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		JLabel lblUsuario = new JLabel("Usuario");
+		//lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblUsuario.setBounds(261, 10, 78, 46);
 		contentPane.add(lblUsuario);
 
@@ -50,7 +50,7 @@ public class CRUDDetalles extends JFrame {
 		
 
 		JLabel lblAnio = new JLabel("Año");
-		lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+//		lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblAnio.setBounds(261, 113, 78, 52);
 		contentPane.add(lblAnio);
 
@@ -60,7 +60,7 @@ public class CRUDDetalles extends JFrame {
 	
 		
 		JLabel lblTitulo = new JLabel("Título");
-		lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+//		lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblTitulo.setBounds(261, 61, 78, 41);
 		contentPane.add(lblTitulo);
 
@@ -69,7 +69,7 @@ public class CRUDDetalles extends JFrame {
 		contentPane.add(txtTitulo);
 		
 		JLabel lblGenero = new JLabel("Género");
-		lblGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+//		lblGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblGenero.setBounds(261, 175, 89, 56);
 		contentPane.add(lblGenero);
 
@@ -98,7 +98,7 @@ public class CRUDDetalles extends JFrame {
 				dispose();
 			}
 		});
-		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+//		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(374, 264, 106, 33);
 		contentPane.add(btnVolver);
 	}
