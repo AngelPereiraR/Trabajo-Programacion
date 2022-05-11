@@ -148,6 +148,8 @@ public class CRUDIntroduccion extends JFrame {
 		btnVolver.setBounds(202, 298, 106, 33);
 		contentPane.add(btnVolver);
 		
+		setVisible(true);
+		
 	}
 	
 	

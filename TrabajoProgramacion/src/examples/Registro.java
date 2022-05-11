@@ -74,6 +74,8 @@ public class Registro extends JFrame {
 		ManejadorBotones escuchador = new ManejadorBotones();
 		btnRegistro.addActionListener(escuchador);
 		btnVolver.addActionListener(escuchador);
+		
+		setVisible(true);
 	}
 	
 	private class ManejadorBotones implements ActionListener {

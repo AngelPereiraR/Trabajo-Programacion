@@ -64,6 +64,8 @@ public class IniciarSesion extends JFrame {
 		
 		ManejadorBotones escuchador = new ManejadorBotones();
 		btnIniciar.addActionListener(escuchador);
+		
+		setVisible(true);
 	}
 	
 	private class ManejadorBotones implements ActionListener {

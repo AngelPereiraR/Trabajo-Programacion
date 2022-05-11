@@ -172,6 +172,8 @@ public class CRUDActualizar extends JFrame {
 		//btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(202, 279, 106, 33);
 		contentPane.add(btnVolver);
+		
+		setVisible(true);
 	}
 
 	public class InsertImg implements ActionListener {

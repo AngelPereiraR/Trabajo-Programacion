@@ -86,6 +86,8 @@ public class CRUDEliminar extends JFrame {
 		lblNewLabel = new JLabel("Confirmar?");
 		lblNewLabel.setBounds(70, 27, 45, 13);
 		contentPane.add(lblNewLabel);
+		
+		setVisible(true);
 	}
 	
 

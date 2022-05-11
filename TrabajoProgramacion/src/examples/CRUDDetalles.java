@@ -101,5 +101,7 @@ public class CRUDDetalles extends JFrame {
 //		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(374, 264, 106, 33);
 		contentPane.add(btnVolver);
+		
+		setVisible(true);
 	}
 }

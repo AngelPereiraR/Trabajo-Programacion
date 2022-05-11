@@ -201,13 +201,6 @@ public class Inicio extends JFrame {
 
 	}
 
-	// para acceder desde otra clase. pero tengo dudas si acceder desde el mismo
-	// atributo llamandolo public.
-
-	public static String[] getGeneroPelicula() {
-		return matrizGeneros;
-	}
-
 	public void rellenarTabla() throws IOException, ClassNotFoundException {
 		dt = new DefaultTableModel();
 		String[] columnas = { "AÑO", "TÍTULO", "GÉNERO", "USUARIO", "RUTA IMAGEN" };
@@ -242,29 +235,29 @@ public class Inicio extends JFrame {
 			JButton selec = (JButton) e.getSource();
 			if (selec.equals(detalles)) {
 				CRUDDetalles frame = new CRUDDetalles(txtUsuario, arrayPeliculas, peliSelec);
-				frame.setVisible(true);
+				//frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (selec.equals(introducir)) {
 				CRUDIntroduccion frame = new CRUDIntroduccion(txtUsuario, arrayPeliculas, matrizGeneros);
-				frame.setVisible(true);
+				//frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 
 			} else if (selec.equals(actualizar)) {
 				CRUDActualizar frame = new CRUDActualizar(txtUsuario, arrayPeliculas, peliSelec, matrizGeneros);
-				frame.setVisible(true);
+				//frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (selec.equals(eliminar)) {
 				CRUDEliminar frame = new CRUDEliminar(txtUsuario, arrayPeliculas, peliSelec);
-				frame.setVisible(true);
+				//frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 
 			} else if (selec.equals(estadistica)) {
-				Estadisticas frame = new Estadisticas(txtUsuario, arrayPeliculas);
-				frame.setVisible(true);
+				Estadisticas frame = new Estadisticas(txtUsuario, arrayPeliculas, matrizGeneros);
+				//frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (selec.equals(salir)) {
