@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class IniciarSesion extends JFrame {
 
@@ -30,6 +32,7 @@ public class IniciarSesion extends JFrame {
 	private File fb;
 	private ObjectInputStream is = null;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>(), arrayPeliculasFichero = new ArrayList<>();
+	private JButton btnNewButton;
 
 	/**
 	 * Create the frame.
@@ -48,22 +51,43 @@ public class IniciarSesion extends JFrame {
 		panel1.add(usuario);
 		txtUsuario = new JTextField(20);
 		panel1.add(txtUsuario);
-		add(panel1);
+		getContentPane().add(panel1);
 		
 		JPanel panel2 = new JPanel();
 		contrasena = new JLabel("Contraseña");
 		panel2.add(contrasena);
 		txtContrasena = new JPasswordField(20);
 		panel2.add(txtContrasena);
-		add(panel2);
+		getContentPane().add(panel2);
 		
 		JPanel panel3 = new JPanel();
 		btnIniciar = new JButton("Iniciar Sesión");
 		panel3.add(btnIniciar);
-		add(panel3);
+		getContentPane().add(panel3);
+		
+		btnNewButton = new JButton("Volver");
+		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		panel3.add(btnNewButton);
+		getContentPane().add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Bienvenido frame = new Bienvenido();
+				frame.setVisible(true);
+				dispose();
+				
+			}
+		});
+		//btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnNewButton.setBounds(200, 414, 91, 21);
+		//contentPane.add(btnVolver);
 		
 		ManejadorBotones escuchador = new ManejadorBotones();
 		btnIniciar.addActionListener(escuchador);
+		
+		
 		
 		setVisible(true);
 	}
