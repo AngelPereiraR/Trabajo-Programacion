@@ -98,7 +98,7 @@ public class Estadisticas extends JFrame {
 			}
 		});
 		//btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		btnVolver.setBounds(186, 414, 91, 21);
+		btnVolver.setBounds(200, 414, 91, 21);
 		//contentPane.add(btnVolver);
 		
 		
