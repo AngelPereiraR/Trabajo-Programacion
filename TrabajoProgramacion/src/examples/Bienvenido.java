@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 public class Bienvenido extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panel1, panel2;
+	private JPanel panel1, panel2, panel3;
 	private JLabel bienvenido;
 	private JButton btnReg, btnIni;
 
@@ -40,7 +42,7 @@ public class Bienvenido extends JFrame {
 	public Bienvenido() {
 		super("Bienvenido");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 300);
+		setBounds(100, 100, 400, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
@@ -62,6 +64,13 @@ public class Bienvenido extends JFrame {
 		ManejadorBotones escuchador = new ManejadorBotones();
 		btnReg.addActionListener(escuchador);
 		btnIni.addActionListener(escuchador);
+		
+		panel3 = new JPanel();
+		JLabel lblImagen = new JLabel();
+		Icon imagen = new ImageIcon("TrabajoProgramacion/images/bienvenido.jpg");
+		lblImagen.setIcon(imagen);
+		panel3.add(lblImagen);
+		add(panel3);
 		
 	}
 	
