@@ -2,6 +2,8 @@ package examples;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class Registro extends JFrame {
 
@@ -37,39 +40,47 @@ public class Registro extends JFrame {
 	public Registro() {
 		super("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 300);
+		setBounds(100, 100, 364, 227);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 		
+		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
+		setIconImage(icono);
+		
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario");
+		usuario.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panel1.add(usuario);
 		txtUsuario = new JTextField(20);
 		panel1.add(txtUsuario);
-		add(panel1);
+		getContentPane().add(panel1);
 		
 		JPanel panel2 = new JPanel();
 		contrasena = new JLabel("Contraseña");
+		contrasena.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panel2.add(contrasena);
 		txtContrasena = new JTextField(20);
 		panel2.add(txtContrasena);
-		add(panel2);
+		getContentPane().add(panel2);
 		
 		JPanel panel3 = new JPanel();
-		telefono = new JLabel("Telefono");
+		telefono = new JLabel("Teléfono");
+		telefono.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panel3.add(telefono);
 		txtTelefono = new JTextField(20);
 		panel3.add(txtTelefono);
-		add(panel3);
+		getContentPane().add(panel3);
 		
 		JPanel panel4 = new JPanel();
 		btnRegistro = new JButton("Registrar");
+		btnRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel4.add(btnRegistro);
 		btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel4.add(btnVolver);
-		add(panel4);
+		getContentPane().add(panel4);
 		
 		ManejadorBotones escuchador = new ManejadorBotones();
 		btnRegistro.addActionListener(escuchador);

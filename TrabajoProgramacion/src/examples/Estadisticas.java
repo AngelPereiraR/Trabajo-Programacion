@@ -2,6 +2,8 @@ package examples;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -36,7 +38,6 @@ public class Estadisticas extends JFrame {
 	 * Create the frame.
 	 */
 	public Estadisticas(JTextField txtUsuario, ArrayList<Peliculas> crudArray, String[] matrizGeneros) {
-		// Creamos la ventana
 		super("Estadísticas");
 		
 		setSize(524, 477);
@@ -45,6 +46,9 @@ public class Estadisticas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);*/
+		
+		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
+		setIconImage(icono);
 
 		matrizNumGeneros = new int[matrizGeneros.length];
 		for (int i = 0; i < matrizGeneros.length; i++) {
@@ -83,7 +87,7 @@ public class Estadisticas extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		getContentPane().add(btnVolver);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,15 +101,9 @@ public class Estadisticas extends JFrame {
 				dispose();
 			}
 		});
-		//btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		btnVolver.setBounds(200, 414, 91, 21);
-		//contentPane.add(btnVolver);
-		
-		
-		
-		
-		
-		
+		contentPane.add(btnVolver);
 		
 		setVisible(true);
 

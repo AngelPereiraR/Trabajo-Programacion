@@ -3,6 +3,7 @@ package examples;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -35,53 +36,59 @@ public class CRUDDetalles extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
+		setIconImage(icono);
 
 		arrayPeliculas = crudArray;
-		//txtUsuario2 = txtUsuario;
 		
-		JLabel lblUsuario = new JLabel("Usuario");
-		//lblUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		lblUsuario.setBounds(261, 10, 78, 46);
 		contentPane.add(lblUsuario);
 
 		txtUsuario2 = new JLabel(pelicula.getUsuario());
+		txtUsuario2.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		txtUsuario2.setBounds(349, 26, 192, 19);
 		contentPane.add(txtUsuario2);
 		
 
-		JLabel lblAnio = new JLabel("Año");
-//		lblAnio.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblAnio.setBounds(261, 113, 78, 52);
+		JLabel lblAnio = new JLabel("Año:");
+		lblAnio.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblAnio.setBounds(261, 115, 78, 52);
 		contentPane.add(lblAnio);
 
 		txtAnio = new JLabel(String.valueOf(pelicula.getCodigo()));
+		txtAnio.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		txtAnio.setBounds(360, 132, 192, 19);
 		contentPane.add(txtAnio);
 	
 		
-		JLabel lblTitulo = new JLabel("Título");
-//		lblTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblTitulo.setBounds(261, 61, 78, 41);
+		JLabel lblTitulo = new JLabel("Título:");
+		lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblTitulo.setBounds(261, 67, 78, 41);
 		contentPane.add(lblTitulo);
 
 		txtTitulo = new JLabel(pelicula.getTitulo());
-		txtTitulo.setBounds(350, 74, 192, 19);
+		txtTitulo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		txtTitulo.setBounds(349, 78, 192, 19);
 		contentPane.add(txtTitulo);
 		
-		JLabel lblGenero = new JLabel("Género");
-//		lblGenero.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		JLabel lblGenero = new JLabel("Género:");
+		lblGenero.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		lblGenero.setBounds(261, 175, 89, 56);
 		contentPane.add(lblGenero);
 
 		txtGenero = new JLabel(pelicula.getGenero());
+		txtGenero.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		txtGenero.setBounds(360, 196, 192, 19);
 		contentPane.add(txtGenero);
 		
 		Image imagen = new ImageIcon(pelicula.getRuta()).getImage();
-		ImageIcon img2=new ImageIcon(imagen.getScaledInstance(167, 271, Image.SCALE_SMOOTH));
+		ImageIcon img2=new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
 		JLabel lblImagen = new JLabel();
 		lblImagen.setIcon(img2);
-		lblImagen.setBounds(40, 26, 167, 271);
+		lblImagen.setBounds(40, 26, 167, 232);
 		contentPane.add(lblImagen);
 		
 	
@@ -98,7 +105,7 @@ public class CRUDDetalles extends JFrame {
 				dispose();
 			}
 		});
-//		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnVolver.setBounds(374, 264, 106, 33);
 		contentPane.add(btnVolver);
 		

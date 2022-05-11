@@ -21,6 +21,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class IniciarSesion extends JFrame {
 
@@ -40,35 +42,42 @@ public class IniciarSesion extends JFrame {
 	public IniciarSesion() {
 		super("Iniciar Sesión");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 300);
+		setBounds(100, 100, 321, 205);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
 		
+		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
+		setIconImage(icono);
+		
 		JPanel panel1 = new JPanel();
-		usuario = new JLabel("Usuario");
+		usuario = new JLabel("Usuario ");
+		usuario.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panel1.add(usuario);
-		txtUsuario = new JTextField(20);
+		txtUsuario = new JTextField(12);
+		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel1.add(txtUsuario);
 		getContentPane().add(panel1);
 		
 		JPanel panel2 = new JPanel();
 		contrasena = new JLabel("Contraseña");
+		contrasena.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panel2.add(contrasena);
-		txtContrasena = new JPasswordField(20);
+		txtContrasena = new JPasswordField(13);
+		txtContrasena.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel2.add(txtContrasena);
 		getContentPane().add(panel2);
 		
 		JPanel panel3 = new JPanel();
 		btnIniciar = new JButton("Iniciar Sesión");
+		btnIniciar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel3.add(btnIniciar);
-		getContentPane().add(panel3);
 		
 		btnNewButton = new JButton("Volver");
-		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel3.add(btnNewButton);
-		getContentPane().add(btnNewButton);
+		getContentPane().add(panel3);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			

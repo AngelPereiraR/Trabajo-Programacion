@@ -2,7 +2,9 @@ package examples;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -28,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 public class Inicio extends JFrame {
 
@@ -64,6 +67,9 @@ public class Inicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout());
 		setContentPane(contentPane);
+		
+		Image icono = Toolkit.getDefaultToolkit().getImage("TrabajoProgramacion/images/claqueta.png");
+		setIconImage(icono);
 
 		if (arrayPeliculas == null) {
 			arrayPeliculas = new ArrayList<>();
@@ -74,19 +80,23 @@ public class Inicio extends JFrame {
 
 		JPanel panel1 = new JPanel();
 		usuario = new JLabel("Usuario:");
+		usuario.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		this.txtUsuario = new JTextField(20);
+		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		this.txtUsuario.setEditable(false);
 		this.txtUsuario.setText(txtUsuario.getText());
 		panel1.add(usuario);
 		panel1.add(this.txtUsuario);
-		add(panel1);
+		getContentPane().add(panel1);
 
 		JPanel panelF = new JPanel();
 		lblFiltro = new JLabel("Ordenar tabla por: ");
+		lblFiltro.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		panelF.add(lblFiltro);
 
 		String[] filtros = { "Título A-Z", "Título Z-A", "Género A-Z", "Año" };
 		comboFiltros = new JComboBox(filtros);
+		comboFiltros.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		comboFiltros.setMaximumRowCount(4);
 		comboFiltros.setSelectedIndex(0);
 		comboFiltros.addItemListener(new ItemListener() {
@@ -143,37 +153,44 @@ public class Inicio extends JFrame {
 			}
 		});
 		panelF.add(comboFiltros);
-		add(panelF);
+		getContentPane().add(panelF);
 
 		JPanel panel2 = new JPanel();
 		tabla = new JTable();
+		tabla.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		tabla.setFillsViewportHeight(true);
 		rellenarTabla();
 		tabla.setFillsViewportHeight(true);
 		panel2.add(new JScrollPane(tabla));
-		add(panel2);
+		getContentPane().add(panel2);
 
 		JPanel panel3 = new JPanel();
 		detalles = new JButton("Detalles");
+		detalles.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		introducir = new JButton("Introducir película");
+		introducir.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		JPanel panel4 = new JPanel();
 		actualizar = new JButton("Actualizar película");
+		actualizar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		eliminar = new JButton("Eliminar película");
+		eliminar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel3.add(detalles);
 		panel3.add(introducir);
-		add(panel3);
+		getContentPane().add(panel3);
 		panel4.add(actualizar);
 		panel4.add(eliminar);
-		add(panel4);
+		getContentPane().add(panel4);
 		JPanel panel5 = new JPanel();
 		estadistica = new JButton("Estadísticas");
+		estadistica.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel5.add(estadistica);
-		add(panel5);
+		getContentPane().add(panel5);
 
 		JPanel panel6 = new JPanel();
 		salir = new JButton("Salir");
+		salir.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		panel6.add(salir);
-		add(panel6);
+		getContentPane().add(panel6);
 
 		tabla.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent Mouse_evt) {
