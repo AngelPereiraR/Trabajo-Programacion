@@ -263,7 +263,10 @@ public class Inicio extends JFrame {
 				dispose();
 
 			} else if (selec.equals(estadistica)) {
-
+				Estadisticas frame = new Estadisticas(txtUsuario, arrayPeliculas);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (selec.equals(salir)) {
 				try {
 					fb = new File("TrabajoProgramacion/peliculas");
