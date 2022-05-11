@@ -39,7 +39,7 @@ public class Estadisticas extends JFrame {
 		// Creamos la ventana
 		super("Estadísticas");
 		
-		setSize(800, 600);
+		setSize(524, 477);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		/*contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,14 +74,39 @@ public class Estadisticas extends JFrame {
 				dataset, // data
 				true, // include legend
 				true, false);
+		getContentPane().setLayout(null);
 
 		ChartPanel panel = new ChartPanel(chart);
+		panel.setBounds(0, 0, 512, 404);
 
-		getContentPane().add(panel, BorderLayout.SOUTH);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Volver");
-		getContentPane().add(btnNewButton, BorderLayout.NORTH);
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		getContentPane().add(btnVolver);
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio ini = null;
+				try {
+					ini = new Inicio(txtUsuario, crudArray);
+				} catch (ClassNotFoundException | IOException e1) {
+				}
+				ini.setVisible(true);
+				ini.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
+		//btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btnVolver.setBounds(186, 414, 91, 21);
+		//contentPane.add(btnVolver);
+		
+		
+		
+		
+		
+		
+		
 		setVisible(true);
 
 
