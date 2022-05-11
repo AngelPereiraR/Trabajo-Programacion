@@ -158,19 +158,18 @@ public class CRUDIntroduccion extends JFrame {
 
 			fileChooser.showSaveDialog(null);
 			
-			String ficheroNombre = fileChooser.getName();
+			String ficheroNombre = fileChooser.getSelectedFile().getName();
 
 			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
 			
-			jtname.setText("TrabajoProgramacion/images" + ficheroNombre);
+			jtname.setText("TrabajoProgramacion/images/" + ficheroNombre);
 			
 			File imagenes = new File(jtname.getText());
 			
 			Path destination = imagenes.toPath();
 
 			try {
-				if (!imagenes.exists())
-					Files.copy(sourcer, destination);
+				Files.copy(sourcer, destination);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
