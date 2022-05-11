@@ -29,22 +29,6 @@ public class CRUDIntroduccion extends JFrame {
 	private JTextField txtUsuario2, txtAnio, txtTitulo;
 	private JButton btnConfirmar, btnVolver, btnRuta;
 	private ArrayList<Peliculas> arrayPeliculas;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CRUDIntroduccion frame = new CRUDIntroduccion(null, null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -173,10 +157,12 @@ public class CRUDIntroduccion extends JFrame {
 			fileChooser.setFileFilter(soloImg);
 
 			fileChooser.showSaveDialog(null);
+			
+			String ficheroNombre = fileChooser.getName();
 
 			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
 			
-			jtname.setText(sourcer.toString());
+			jtname.setText("TrabajoProgramacion/images" + ficheroNombre);
 			
 			File imagenes = new File(jtname.getText());
 			

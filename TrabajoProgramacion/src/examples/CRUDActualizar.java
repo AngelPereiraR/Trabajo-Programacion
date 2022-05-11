@@ -35,22 +35,6 @@ public class CRUDActualizar extends JFrame {
 	private ArrayList<Peliculas> arrayPeliculas;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CRUDActualizar frame = new CRUDActualizar(null, null, null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public CRUDActualizar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula, String [] matrizGeneros) {

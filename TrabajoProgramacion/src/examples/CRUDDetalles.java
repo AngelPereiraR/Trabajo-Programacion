@@ -23,21 +23,6 @@ public class CRUDDetalles extends JFrame {
 	private JLabel txtUsuario2, txtAnio, txtTitulo, txtGenero;
 	private JButton btnConfirmar, btnVolver, btnRuta;
 	private ArrayList<Peliculas> arrayPeliculas = new ArrayList<>();
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CRUDDetalles frame = new CRUDDetalles(null, null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

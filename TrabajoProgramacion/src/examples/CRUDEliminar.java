@@ -30,19 +30,6 @@ public class CRUDEliminar extends JFrame {
 	private ArrayList<Peliculas> arrayPeliculas;
 	private JLabel lblNewLabel;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CRUDEliminar frame = new CRUDEliminar(null, null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
 	public CRUDEliminar(JTextField txtUsuario, ArrayList<Peliculas> crudArray, Peliculas pelicula) {
 		setTitle("Eliminar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

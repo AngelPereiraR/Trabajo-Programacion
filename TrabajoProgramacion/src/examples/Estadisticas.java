@@ -27,23 +27,6 @@ public class Estadisticas extends JFrame {
 	private int[] matrizNumGeneros;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Estadisticas frame = new Estadisticas(null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public Estadisticas(JTextField txtUsuario, ArrayList<Peliculas> crudArray) {
